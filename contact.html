@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Focus Clinical and Diagnostics Centre</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Get in touch with Focus Clinical. Find contact details for our Murang’a, Embu, Ishiara, and Kerugoya branches or send us a message online.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .contact-method-card {
+            background: var(--white);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-method-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-method-content h4 {
+            margin-bottom: 5px;
+            color: var(--text-main);
+        }
+
+        .contact-method-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .contact-form-container {
+            background: var(--white);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 992px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. Top Info Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-phone"></i> +254 7XX XXX XXX</span>
+                <span><i class="fas fa-envelope"></i> info@focusclinical.co.ke</span>
+                <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="locations.html">Locations</a>
+                <a href="contact.html" class="active" style="color: var(--primary);">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="appointment.html" class="btn btn-primary">Make Appointment <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="bg-soft" style="padding: var(--space-xl) 0;">
+            <div class="container" style="text-align: center;">
+                <span class="badge">Get In Touch</span>
+                <h1 style="margin-bottom: 20px;">Contact Us</h1>
+                <p style="max-width: 600px; margin: 0 auto;">Have a question or need assistance? Reach out to us through
+                    any of our channels or visit our branches.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="container" style="padding-top: var(--space-lg);">
+            <div class="contact-layout">
+
+                <!-- Contact Info -->
+                <div class="contact-info-cards">
+                    <div class="contact-method-card">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="contact-method-content">
+                            <h4>Phone Number</h4>
+                            <p>+254 7XX XXX XXX (General)</p>
+                            <p>+254 7XX XXX XXX (Emergencies)</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method-card">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-method-content">
+                            <h4>Email Address</h4>
+                            <p>info@focusclinical.co.ke</p>
+                            <p>appointments@focusclinical.co.ke</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method-card">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-method-content">
+                            <h4>Main Office</h4>
+                            <p>United Plaza, Murang’a Town</p>
+                            <p>P.O. Box XXX - XXXXX, Murang'a</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method-card">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-method-content">
+                            <h4>Working Hours</h4>
+                            <p>Mon - Sat: 8:00 AM - 6:00 PM</p>
+                            <p>Sunday: Closed (Emergencies Only)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <form id="contactForm">
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="margin-bottom: 10px;">Send us a Message</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Fill out the form below and our
+                                team will get back to you as soon as possible.</p>
+                        </div>
+
+                        <div class="form-grid" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label for="name">Your Name <span class="required">*</span></label>
+                                <input type="text" id="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" placeholder="your.email@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" placeholder="+254 XXX XXX XXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject">
+                                    <option value="General Inquiry">General Inquiry</option>
+                                    <option value="Appointment Support">Appointment Support</option>
+                                    <option value="Billings">Billings & Insurance</option>
+                                    <option value="Feedback">Feedback/Complaints</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" rows="5" placeholder="How can we help you?" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; border-radius: var(--radius-full); padding: 18px;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Maps Integration (Conceptual) -->
+        <section class="container" style="margin-top: var(--space-xl);">
+            <div style="text-align: center; margin-bottom: var(--space-lg);">
+                <h2>Visit Our Branches</h2>
+            </div>
+            <div class="locations-page-grid">
+                <div class="location-full-card">
+                    <h3>Murang'a</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;">United Plaza, Uhuru Highway</p>
+                    <a href="locations.html#muranga" class="btn btn-outline" style="width: 100%;">View on Map</a>
+                </div>
+                <div class="location-full-card">
+                    <h3>Kerugoya</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;">Near Family Bank, Main Street</p>
+                    <a href="locations.html#kerugoya" class="btn btn-outline" style="width: 100%;">View on Map</a>
+                </div>
+                <div class="location-full-card">
+                    <h3>Embu</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;">Town Centre, Main Street</p>
+                    <a href="locations.html#embu" class="btn btn-outline" style="width: 100%;">View on Map</a>
+                </div>
+                <div class="location-full-card">
+                    <h3>Ishiara</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;">Market Road, Near Bus Stage</p>
+                    <a href="locations.html#ishiara" class="btn btn-outline" style="width: 100%;">View on Map</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer" style="margin-top: var(--space-2xl);">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="display: block; margin-bottom: 20px;">
+                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo">
+                    </a>
+                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. Trusted by
+                        families for over a decade.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="locations.html">Our Branches</a></li>
+                        <li><a href="appointment.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html#diagnostics">Diagnostics</a></li>
+                        <li><a href="services.html#maternal">Maternal Care</a></li>
+                        <li><a href="services.html#family-planning">Family Planning</a></li>
+                        <li><a href="services.html#pharmacy">Pharmacy</a></li>
+                        <li><a href="services.html#specialized">Specialized Clinics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Locations</h4>
+                    <ul>
+                        <li><a href="locations.html#muranga">Murang'a</a></li>
+                        <li><a href="locations.html#kerugoya">Kerugoya</a></li>
+                        <li><a href="locations.html#embu">Embu</a></li>
+                        <li><a href="locations.html#ishiara">Ishiara</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Focus Clinical and Diagnostics Centre Ltd. All Rights Reserved. | Designed by GMCreative
+                    | Powering digital healthcare.</p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <a href="admin/login.html" style="color: rgba(255,255,255,0.5); text-decoration: none;">
+                        <i class="fas fa-lock" style="margin-right: 5px;"></i>Staff Portal
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        // Function to save contact to database (localStorage)
+        function saveContactToDatabase(data) {
+            const storageKey = 'focusContacts';
+            const contacts = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            data.id = Date.now().toString();
+            data.createdAt = new Date().toISOString();
+            data.status = 'unread';
+            contacts.push(data);
+            localStorage.setItem(storageKey, JSON.stringify(contacts));
+        }
+
+        // Specific form handler for contact page
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerText;
+
+                btn.innerText = 'Sending...';
+                btn.disabled = true;
+
+                // Collect form data
+                const contactData = {
+                    name: document.getElementById('name')?.value || '',
+                    email: document.getElementById('email')?.value || '',
+                    phone: document.getElementById('phone')?.value || '',
+                    subject: document.getElementById('subject')?.value || '',
+                    message: document.getElementById('message')?.value || ''
+                };
+
+                // Save to localStorage database
+                saveContactToDatabase(contactData);
+
+                setTimeout(() => {
+                    // Reuse the success message function from scripts.js if available
+                    if (typeof showSuccessMessage === 'function') {
+                        showSuccessMessage('Message Sent!', 'Thank you for reaching out. Our team will get back to you shortly.');
+                        contactForm.reset();
+                    } else {
+                        alert('Message Sent! Thank you for reaching out.');
+                        contactForm.reset();
+                    }
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+
+</html>

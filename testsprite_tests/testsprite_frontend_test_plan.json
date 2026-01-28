@@ -1,0 +1,329 @@
+[
+  {
+    "id": "TC001",
+    "title": "Sticky Global Navigation Visibility and Functionality on Desktop",
+    "description": "Verify that the global navigation header remains sticky and visible at the top during page scroll on desktop browsers, and all navigation links function correctly.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the website homepage on a desktop browser."
+      },
+      {
+        "type": "action",
+        "description": "Scroll down the page slowly."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the global navigation header remains fixed at the top of the viewport during scrolling."
+      },
+      {
+        "type": "action",
+        "description": "Click each navigation link on the global header."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that each link navigates to the correct section or page as expected."
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Sticky Global Navigation Visibility and Burger Menu on Mobile",
+    "description": "Verify that the global navigation header is sticky, the burger menu is visible and functional on mobile viewports, and all navigation options work correctly.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the website homepage on a mobile device or emulator with small screen size."
+      },
+      {
+        "type": "action",
+        "description": "Scroll down the page."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the global navigation header remains sticky and visible at the top during scrolling."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the burger menu icon is visible on the global navigation header."
+      },
+      {
+        "type": "action",
+        "description": "Tap the burger menu icon."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the navigation menu expands and displays all navigation links correctly."
+      },
+      {
+        "type": "action",
+        "description": "Tap each navigation option."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that each navigation option links to the appropriate page or section."
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Testimonial Slider Auto-play and Loop Functionality",
+    "description": "Verify that the testimonial slider auto-plays smoothly, loops infinitely, and displays correct patient feedback with author images.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the homepage where the testimonial slider is displayed."
+      },
+      {
+        "type": "assertion",
+        "description": "Check the first testimonial text and author image are displayed correctly."
+      },
+      {
+        "type": "action",
+        "description": "Observe the slider for at least two full cycles or the equivalent display time of multiple testimonials."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the slider automatically advances slides smoothly without user interaction."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the slider loops infinitely, returning to the first testimonial after the last."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that author images correspond correctly to the testimonial text displayed."
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Appointment Booking Form Validation with All Valid Inputs",
+    "description": "Verify that submitting the appointment booking form with valid data displays a successful confirmation message.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the appointment booking page or open the embedded appointment form on the homepage."
+      },
+      {
+        "type": "action",
+        "description": "Fill in all required form fields with valid information (name, contact info, date, time, healthcare service, specialist if applicable)."
+      },
+      {
+        "type": "action",
+        "description": "Submit the appointment booking form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that client-side validation passes without errors."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the user receives a clear, user-friendly confirmation message indicating successful submission."
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Appointment Booking Form Validation with Missing Required Fields",
+    "description": "Verify client-side validation prevents submission when required fields are missing, and appropriate error messages are shown.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the appointment booking page or open the embedded appointment form."
+      },
+      {
+        "type": "action",
+        "description": "Partially fill the form leaving one or more required fields empty (e.g., no name or date)."
+      },
+      {
+        "type": "action",
+        "description": "Attempt to submit the appointment booking form."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm form submission is blocked."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify clear and specific validation error messages appear next to each missing or invalid required field."
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Appointment Booking Form Validation with Invalid Input Formats",
+    "description": "Verify that client-side validation flags invalid inputs such as incorrect email or phone formats and prevents submission.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the appointment booking form."
+      },
+      {
+        "type": "action",
+        "description": "Enter invalid formats into fields (e.g., invalid email format, wrong phone number format)."
+      },
+      {
+        "type": "action",
+        "description": "Attempt to submit the form."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the form blocks submission."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the display of appropriate error messages indicating the invalid input format."
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Service Information Pages Content Accuracy and Display",
+    "description": "Verify that service information pages display comprehensive and accurate details about healthcare services, categories, and specialists.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the service information page from the global navigation."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify presence of all listed healthcare service categories."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that each category displays correct specialists relevant to that service."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the accuracy of service descriptions and details consistent with clinic records."
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Location Directory Display and Information Accuracy",
+    "description": "Verify that the locations page displays correct information for Kerugoya and Ishiara clinic branches, including contact info and operation hours.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the locations page via global navigation."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm both Kerugoya and Ishiara locations are listed."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the displayed contact information matches the clinic records."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that operation hours are displayed correctly and completely for both locations."
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Scroll-triggered Reveal Animations Functionality and Performance",
+    "description": "Validate that scroll-triggered animations reveal UI elements smoothly without layout shifts or significant performance degradation.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load the homepage and start scrolling slowly down the page."
+      },
+      {
+        "type": "assertion",
+        "description": "Observe that content sections and cards reveal themselves as they enter the viewport."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that no sudden layout shifts occur when animations trigger."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify smooth animation without jank or noticeable performance issues."
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "UI Components Neubomorphic Style Compliance and Accessibility",
+    "description": "Verify that all UI components such as buttons, cards, input fields, and modals adhere to the neumorphic style guidelines and accessibility standards including contrast, focus states, and motion preferences.",
+    "category": "ui",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate through multiple pages including homepage, appointment, and service pages."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that all buttons and interactive elements follow neumorphic styling including shadows and highlights as per design system."
+      },
+      {
+        "type": "assertion",
+        "description": "Check all text and background contrasts meet accessibility guidelines."
+      },
+      {
+        "type": "action",
+        "description": "Tab through focusable elements and observe visible and clear focus states."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that focus states are consistent and meet accessibility standards."
+      },
+      {
+        "type": "action",
+        "description": "Enable system-level motion reduction preferences."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify animations are reduced or disabled appropriately for users with motion preferences."
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Responsive Behavior Verification Across Devices",
+    "description": "Ensure the website layout and features adapt properly and remain fully functional on a variety of screen sizes including desktop, tablet, and mobile.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the website on devices or simulators representing desktop, tablet, and mobile screen sizes."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that all key UI elements including navigation, forms, sliders, and content are displayed and usable without overflow or layout breaks."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that the sticky header and burger menu behave correctly and remain accessible across all screen sizes."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that interactive elements and text are sized appropriately for touch on smaller devices."
+      }
+    ]
+  }
+]

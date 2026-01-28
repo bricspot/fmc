@@ -1,0 +1,16 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8080/",
+  "executionArgs": {
+    "projectName": "Focus clinical diagnostics",
+    "projectPath": "/Users/gmwangi/Documents/Antigravity/Focus clinical diagnostics",
+    "testIds": [],
+    "additionalInstruction": "Test the core functionality including navigation, form submission, and responsiveness. Use http://localhost:8080/ as the base URL. Ensure all tests point to the correct files at the root of the server.",
+    "envs": {
+      "API_KEY": "sk-user-bie2NpRjiUNczsK8BQqhP2Jexk7DklSBef-c_6goG55a04BRwioUWL-3zr-HMqsbfZbuFXtmLVO4f0GCc8-QhyB-eyW6I4nAQSAEia8aYsZd9q78YCuMyqjAvLnNK1qivig"
+    }
+  },
+  "proxy": "http://e5c685a9-f80b-4990-aad3-935201806d73:kRRT2gmIKSq9O9BR75NaNY0xmvopo2t3@tun.testsprite.com:8080"
+}

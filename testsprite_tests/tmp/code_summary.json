@@ -1,0 +1,35 @@
+{
+  "tech_stack": ["HTML5", "CSS3", "JavaScript (Vanilla)"],
+  "features": [
+    {
+      "name": "Global Navigation",
+      "description": "Sticky header with scroll effects and a responsive mobile burger menu.",
+      "files": ["index.html", "js/scripts.js", "css/style.css"]
+    },
+    {
+      "name": "Testimonial Slider",
+      "description": "Dynamic auto-playing slider displaying patient testimonials with author details and images.",
+      "files": ["js/scripts.js"]
+    },
+    {
+      "name": "Appointment Booking System",
+      "description": "Interactive booking form on appointment.html and embedded in index.html with validation and simulated submission feedback.",
+      "files": ["appointment.html", "index.html", "js/scripts.js"]
+    },
+    {
+      "name": "Service Information",
+      "description": "Detailed display of healthcare services, categories, and specialist information.",
+      "files": ["services.html", "index.html"]
+    },
+    {
+      "name": "Location Directory",
+      "description": "Information about clinic branches (Kerugoya, Ishiara) with contact details and operating hours.",
+      "files": ["locations.html"]
+    },
+    {
+      "name": "Scroll Animations",
+      "description": "Intersection Observer based reveal animations for sections and cards to enhance UX.",
+      "files": ["js/scripts.js"]
+    }
+  ]
+}

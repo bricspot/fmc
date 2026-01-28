@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Focus Clinical and Diagnostics Centre Ltd</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .mv-card {
+            background: var(--white);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border-top: 5px solid var(--accent);
+        }
+
+        .mv-card.vision {
+            border-top-color: var(--accent);
+        }
+
+        .mv-card i {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+            color: var(--primary);
+        }
+
+        .mv-card.vision i {
+            color: var(--accent);
+        }
+
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+        }
+
+        .story-img {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 900px) {
+
+            .mission-vision-grid,
+            .story-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1. Top Info Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-phone"></i> +254 7XX XXX XXX</span>
+                <span><i class="fas fa-envelope"></i> info@focusclinical.co.ke</span>
+                <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active" style="color: var(--accent);">About</a>
+                <a href="services.html">Services</a>
+                <a href="locations.html">Locations</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="appointment.html" class="btn btn-primary">Make Appointment <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="bg-soft" style="padding: var(--space-xl) 0;">
+            <div class="container" style="text-align: center;">
+                <span class="badge">Established 2012</span>
+                <h1 style="margin-bottom: 20px;">Our Journey in Healthcare</h1>
+                <p style="max-width: 700px; margin: 0 auto;">Focus Clinical and Diagnostics Centre Ltd is a premier
+                    healthcare provider dedicated to bringing high-quality medical services and advanced diagnostics to
+                    our local communities.</p>
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="container" style="padding: var(--space-3xl) 0;">
+            <div style="text-align: center; margin-bottom: var(--space-xl);">
+                <span class="badge">Core Values</span>
+                <h2>What Drives Us</h2>
+            </div>
+            <div class="mission-vision-grid">
+                <div class="mv-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Our Mission</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-muted);">To provide integrated,
+                        high-quality healthcare and modern diagnostic services that are accessible, affordable, and
+                        tailored to the unique needs of our patients across Central Kenya.</p>
+                </div>
+                <div class="mv-card vision">
+                    <i class="fas fa-eye"></i>
+                    <h3>Our Vision</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-muted);">To be the most trusted and
+                        preferred medical diagnostic and outpatient centre in the region, recognized for excellence in
+                        patient care, technological innovation, and community health empowerment.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story -->
+        <section class="bg-soft" style="padding: var(--space-3xl) 0;">
+            <div class="container">
+                <div class="story-section">
+                    <div class="story-img">
+                        <img src="assets/images/Nurse.jpg" alt="Our Medical Professional">
+                    </div>
+                    <div>
+                        <span class="badge">Our Story</span>
+                        <h2 style="margin: 20px 0;">A Decade of Service</h2>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 25px;">
+                            Founded over 10 years ago in Murang'a Town, Focus Clinical started as a small diagnostic
+                            laboratory with a big ambition: to bridge the gap in specialist medical services in the
+                            region. </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 25px;">
+                            Today, we have grown into a multi-branch network covering Murang'a, Kerugoya, Embu, and
+                            Ishiara. We've stayed true to our roots, providing personalized care that treats every
+                            patient like family, while continuously investing in the latest medical technology.</p>
+                        <div style="display: flex; gap: 40px; margin-top: 30px;">
+                            <div>
+                                <h4 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 5px;">10k+</h4>
+                                <p style="font-weight: 600; color: var(--text-main);">Patients Served</p>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 5px;">4</h4>
+                                <p style="font-weight: 600; color: var(--text-main);">Regional Branches</p>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 5px;">15+</h4>
+                                <p style="font-weight: 600; color: var(--text-main);">Specialists</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="container"
+            style="text-align: center; margin-top: var(--space-3xl); margin-bottom: var(--space-xl);">
+            <div style="background: var(--bg-soft); padding: var(--space-xl); border-radius: var(--radius-lg);">
+                <h2>Ready to prioritize your health?</h2>
+                <p style="margin-bottom: 25px; color: var(--text-muted);">Book an appointment online with any of our
+                    specialists today or reach out for inquiries.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="appointment.html" class="btn btn-accent" style="border-radius: var(--radius-full);">Book
+                        Appointment</a>
+                    <a href="contact.html" class="btn btn-outline" style="border-radius: var(--radius-full);">Contact
+                        Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="display: block; margin-bottom: 20px;">
+                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo">
+                    </a>
+                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. Trusted by
+                        families for over a decade.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="locations.html">Our Branches</a></li>
+                        <li><a href="appointment.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Medical Services</h4>
+                    <ul>
+                        <li><a href="services.html#diagnostics">Diagnostics</a></li>
+                        <li><a href="services.html#maternal">Maternal Care</a></li>
+                        <li><a href="services.html#family-planning">Family Planning</a></li>
+                        <li><a href="services.html#specialized">Specialized Clinics</a></li>
+                        <li><a href="services.html#pharmacy">Pharmacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get In Touch</h4>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> United
+                        Plaza, Murang’a</p>
+                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +254 7XX XXX XXX
+                    </p>
+                    <p><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i>
+                        info@focusclinical.co.ke</p>
+                    <p style="margin-top: 20px;"><a href="contact.html" class="btn btn-outline btn-sm"
+                            style="color: white; border-color: rgba(255,255,255,0.3);">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Focus Clinical and Diagnostics Centre Ltd. All Rights Reserved. | Designed by GMCreative
+                    | Powering digital healthcare.</p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <a href="admin/login.html" style="color: rgba(255,255,255,0.5); text-decoration: none;">
+                        <i class="fas fa-lock" style="margin-right: 5px;"></i>Staff Portal
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

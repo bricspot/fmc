@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Medical Services | Focus Clinical and Diagnostics Centre</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Explore our comprehensive medical services including outpatient care, maternal health, advanced diagnostics, dental, optical, and nutrition counselling.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .service-detail-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            transition: var(--transition);
+        }
+
+        .service-detail-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .service-img-box {
+            height: 100%;
+            min-height: 300px;
+        }
+
+        .service-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-content-box {
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-content-box h3 {
+            color: var(--accent);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+        }
+
+        .service-content-box p {
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            line-height: 1.7;
+        }
+
+        .service-features {
+            margin-bottom: var(--space-lg);
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .service-features li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .service-features li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        @media (max-width: 900px) {
+            .service-detail-card {
+                grid-template-columns: 1fr;
+            }
+
+            .service-img-box {
+                height: 250px;
+                min-height: auto;
+            }
+
+            .service-content-box {
+                padding: var(--space-lg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. Top Info Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-phone"></i> +254 7XX XXX XXX</span>
+                <span><i class="fas fa-envelope"></i> info@focusclinical.co.ke</span>
+                <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html" class="active" style="color: var(--accent);">Services</a>
+                <a href="locations.html">Locations</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="appointment.html" class="btn btn-primary">Make Appointment <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="bg-soft" style="padding: var(--space-xl) 0;">
+            <div class="container" style="text-align: center;">
+                <span class="badge">Comprehensive Care</span>
+                <h1 style="margin-bottom: 20px;">Our Medical Services</h1>
+                <p style="max-width: 700px; margin: 0 auto;">From routine checkups to specialized treatments, our team
+                    of experts is dedicated to your well-being with precision and compassion.</p>
+            </div>
+        </section>
+
+        <!-- Services List -->
+        <section class="container"
+            style="display: flex; flex-direction: column; gap: var(--space-2xl); padding-top: var(--space-xl);">
+
+            <!-- Maternal & Child Health -->
+            <div class="service-detail-card" id="maternal">
+                <div class="service-img-box">
+                    <img src="assets/images/Maternal & Child Health.jpg" alt="Mother and Child Care">
+                </div>
+                <div class="service-content-box">
+                    <h3><i class="fas fa-baby"></i> Maternal & Child Health</h3>
+                    <p>We provide comprehensive care for mothers and children, ensuring a healthy start to life. Our
+                        dedicated unit offers antenatal and postnatal care, immunization programs, and growth
+                        monitoring.</p>
+                    <ul class="service-features">
+                        <li>Antenatal & Postnatal Care clinics</li>
+                        <li>Child Immunization (KEPI schedule)</li>
+                        <li>Growth monitoring & nutrition support</li>
+                        <li>Pediatric consultations</li>
+                    </ul>
+                    <a href="appointment.html" class="btn btn-primary">Book Consultation</a>
+                </div>
+            </div>
+
+            <!-- Outpatient Care -->
+            <div class="service-detail-card" id="outpatient">
+                <div class="service-content-box">
+                    <h3><i class="fas fa-stethoscope"></i> General Outpatient Care</h3>
+                    <p>Our outpatient department is staffed by experienced clinical officers and doctors ready to handle
+                        a wide range of common ailments and emergencies efficiently and compassionately.</p>
+                    <ul class="service-features">
+                        <li>General Physician Consultations</li>
+                        <li>Minor Surgical Procedures</li>
+                        <li>Emergency First Aid & Triage</li>
+                        <li>Chronic Disease Management (Diabetes, Hypertension)</li>
+                    </ul>
+                    <a href="appointment.html" class="btn btn-primary">Book Consultation</a>
+                </div>
+                <div class="service-img-box">
+                    <img src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?q=80&w=1000&auto=format&fit=crop"
+                        alt="Doctor Consultation">
+                </div>
+            </div>
+
+            <!-- Diagnostics -->
+            <div class="service-detail-card" id="diagnostics">
+                <div class="service-img-box">
+                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1000&auto=format&fit=crop"
+                        alt="Laboratory Microscope">
+                </div>
+                <div class="service-content-box">
+                    <h3><i class="fas fa-microscope"></i> Advanced Diagnostics</h3>
+                    <p>Accurate diagnosis is the key to effective treatment. Our modern laboratory and imaging centre
+                        provide precise results with quick turnaround times.</p>
+                    <ul class="service-features">
+                        <li>Full Haematology & Bio-Chemistry Profiles</li>
+                        <li>High-Definition Ultrasound Imaging (3D/4D)</li>
+                        <li>Parasitology & Microbiology</li>
+                        <li>Hormonal Profiles & Molecular Biology</li>
+                    </ul>
+                    <a href="appointment.html" class="btn btn-primary">Book Lab Test</a>
+                </div>
+            </div>
+
+            <!-- Specialized Care (Dental, Optical, Nutrition) -->
+            <div class="service-detail-card" id="specialized">
+                <div class="service-content-box">
+                    <h3><i class="fas fa-user-md"></i> Specialized Clinics</h3>
+                    <p>Beyond general medicine, we offer specialized clinics to cater to specific health needs, focusing
+                        on holistic well-being and preventative care.</p>
+                    <ul class="service-features">
+                        <li><strong>Dental Clinic:</strong> Checkups, fillings, extractions & hygiene.</li>
+                        <li><strong>Optical Unit:</strong> Eye exams and prescription glasses.</li>
+                        <li><strong>Nutrition Counselling:</strong> Personalized diet plans.</li>
+                        <li><strong>Mental Health:</strong> Professional counselling services.</li>
+                    </ul>
+                    <a href="appointment.html" class="btn btn-primary">Book Specialist</a>
+                </div>
+                <div class="service-img-box">
+                    <img src="assets/images/Specialized Clinics.jpg" alt="Nutrition and Dental Care">
+                </div>
+            </div>
+
+            <!-- Pharmacy -->
+            <div class="service-detail-card" id="pharmacy">
+                <div class="service-img-box">
+                    <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=1000&auto=format&fit=crop"
+                        alt="Pharmacy Shelf">
+                </div>
+                <div class="service-content-box">
+                    <h3><i class="fas fa-pills"></i> Pharmacy Services</h3>
+                    <p>Our well-stocked pharmacy ensures you get genuine, high-quality medication prescribed by our
+                        doctors. Our clinical pharmacists offer free advice on medication use.</p>
+                    <ul class="service-features">
+                        <li>Prescription Dispensing</li>
+                        <li>Over-the-Counter Medications</li>
+                        <li>Medication Therapy Management</li>
+                        <li>Refill Reminders</li>
+                    </ul>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="appointment.html" class="btn btn-primary">Contact Pharmacy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Family Planning -->
+            <div class="service-detail-card" id="family-planning">
+                <div class="service-content-box">
+                    <h3><i class="fas fa-users"></i> Family Planning Services</h3>
+                    <p>Our Family Planning unit provides comprehensive reproductive health services tailored to your
+                        individual needs and lifestyle. Our trained nurses and clinical officers offer confidential,
+                        non-judgmental consultations to help you make informed decisions about your reproductive health.
+                    </p>
+                    <ul class="service-features">
+                        <li><strong>Short-term Methods:</strong> Oral contraceptive pills, injectable contraceptives
+                            (Depo-Provera), and emergency contraception</li>
+                        <li><strong>Long-term Methods:</strong> Intrauterine devices (IUDs - Copper T & Mirena), and
+                            Implants (Jadelle, Implanon)</li>
+                        <li><strong>Permanent Methods:</strong> Counselling and referral for tubal ligation and
+                            vasectomy</li>
+                        <li><strong>Fertility Awareness:</strong> Natural family planning education and cycle tracking
+                            guidance</li>
+                        <li><strong>Pre-conception Care:</strong> Health assessments and counselling for couples
+                            planning pregnancy</li>
+                    </ul>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;"><i
+                            class="fas fa-user-nurse"
+                            style="color: var(--primary); margin-right: 8px;"></i><strong>Specialist:</strong> Nurse
+                        Mary Wanjiru (Certified Family Planning Counsellor) &amp; Clinical Officer Peter Mwangi</p>
+                    <a href="appointment.html" class="btn btn-primary">Book Consultation</a>
+                </div>
+                <div class="service-img-box">
+                    <img src="assets/images/Family Planning Services.jpg" alt="Family Planning Consultation">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CTA Section -->
+        <section class="container" style="text-align: center; margin-top: var(--space-xl);">
+            <div style="background: var(--bg-soft); padding: var(--space-xl); border-radius: var(--radius-lg);">
+                <h2>Ready to prioritize your health?</h2>
+                <p style="margin-bottom: 25px; color: var(--text-muted);">Book an appointment online with any of our
+                    specialists today or reach out for inquiries.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="appointment.html" class="btn btn-accent" style="border-radius: var(--radius-full);">Book
+                        Appointment</a>
+                    <a href="contact.html" class="btn btn-outline" style="border-radius: var(--radius-full);">Contact
+                        Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="display: block; margin-bottom: 20px;">
+                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo">
+                    </a>
+                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. Trusted by
+                        families for over a decade.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="locations.html">Our Branches</a></li>
+                        <li><a href="appointment.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Medical Services</h4>
+                    <ul>
+                        <li><a href="services.html#diagnostics">Diagnostics</a></li>
+                        <li><a href="services.html#maternal">Maternal Care</a></li>
+                        <li><a href="services.html#family-planning">Family Planning</a></li>
+                        <li><a href="services.html#specialized">Specialized Clinics</a></li>
+                        <li><a href="services.html#pharmacy">Pharmacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get In Touch</h4>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> United
+                        Plaza, Murang’a</p>
+                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +254 7XX XXX XXX
+                    </p>
+                    <p><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i>
+                        info@focusclinical.co.ke</p>
+                    <p style="margin-top: 20px;"><a href="contact.html" class="btn btn-outline btn-sm"
+                            style="color: white; border-color: rgba(255,255,255,0.3);">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Focus Clinical and Diagnostics Centre Ltd. All Rights Reserved. | Designed by GMCreative
+                    | Powering digital healthcare.</p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <a href="admin/login.html" style="color: rgba(255,255,255,0.5); text-decoration: none;">
+                        <i class="fas fa-lock" style="margin-right: 5px;"></i>Staff Portal
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Focus Clinical and Diagnostics Centre</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Book an appointment online with Focus Clinical. Select your service, date, and share your details for a quick confirmation.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- 1. Top Info Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-phone"></i> +254 7XX XXX XXX</span>
+                <span><i class="fas fa-envelope"></i> info@focusclinical.co.ke</span>
+                <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="index.html#services">Services</a>
+                <a href="locations.html">Locations</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="appointment.html" class="btn btn-primary">Make Appointment <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header / Appointment Process -->
+        <section class="bg-soft" style="padding: var(--space-xl) 0;">
+            <div class="container">
+                <div class="appointment-info centered-content">
+                    <span class="badge">Book Online</span>
+                    <h1 style="margin-bottom: 20px;">Get Expert Care in 3 Simple Steps</h1>
+                    <p style="max-width: 700px; margin: 0 auto;">Skip the queue. Reserve your spot at any of our
+                        branches in Murang'a, Embu, Ishiara, or Kerugoya by following these steps.</p>
+
+                    <div class="steps-list" style="margin-top: 40px;">
+                        <div class="step-item">
+                            <div class="step-number">01</div>
+                            <div class="step-text">
+                                <h3>Select Your Service</h3>
+                                <p>Choose from our wide range of clinical and diagnostic services in the form below.</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">02</div>
+                            <div class="step-text">
+                                <h3>Pick a Location</h3>
+                                <p>Find the branch nearest to you for maximum convenience during your visit.</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">03</div>
+                            <div class="step-text">
+                                <h3>Confirm Booking</h3>
+                                <p>Provide your details and we'll confirm your visit via SMS or Call within 24 hours.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Appointment Form Section -->
+        <section class="container" style="padding-top: var(--space-lg);">
+            <div class="appointment-layout">
+
+                <!-- Main Form -->
+                <div class="appointment-form-container">
+                    <form id="detailedResultForm">
+
+                        <!-- Service Selection -->
+                        <div class="section-title">
+                            <i class="fas fa-briefcase-medical"></i>
+                            <h3>Service Selection</h3>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="service">Select Service <span class="required">*</span></label>
+                            <select id="service" required>
+                                <option value="">Choose a service...</option>
+                                <option value="Outpatient">Outpatient Consultation</option>
+                                <option value="Specialist">Specialist Clinic</option>
+                                <option value="Maternal">Maternal & Child Health</option>
+                                <option value="Diagnostics">Laboratory / Diagnostics</option>
+                                <option value="Ultrasound">Ultrasound</option>
+                                <option value="Pharmacy">Pharmacy Refill</option>
+                            </select>
+                        </div>
+
+                        <div class="form-grid" style="margin-bottom: 30px;">
+                            <div class="form-group">
+                                <label for="date">Preferred Date <span class="required">*</span></label>
+                                <input type="date" id="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Preferred Time <span class="required">*</span></label>
+                                <select id="time" required>
+                                    <option value="">Select time...</option>
+                                    <option value="Morning">Morning (8am - 12pm)</option>
+                                    <option value="Afternoon">Afternoon (12pm - 4pm)</option>
+                                    <option value="Evening">Evening (4pm - 6pm)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 30px;">
+
+                        <!-- Patient Information -->
+                        <div class="section-title">
+                            <i class="fas fa-user"></i>
+                            <h3>Patient Information</h3>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="fullname">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullname" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-grid" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" placeholder="+254 XXX XXX XXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" placeholder="your.email@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label for="dob">Date of Birth <span class="required">*</span></label>
+                                <input type="date" id="dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_passport">ID/Passport Number <span class="required">*</span></label>
+                                <input type="text" id="id_passport" placeholder="Enter ID or Passport number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="reason">Reason for Visit <span class="required">*</span></label>
+                            <textarea id="reason" rows="3" placeholder="Please describe your reason for visit..."
+                                required></textarea>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="first_visit" name="first_visit">
+                            <label for="first_visit">This is my first visit to Focus Clinical</label>
+                        </div>
+
+                        <hr style="border: 0; border-top: 1px solid var(--border); margin: 30px 0;">
+
+                        <!-- Insurance Information -->
+                        <div class="section-title">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <h3>Insurance Information (Optional)</h3>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="insurance_provider">Insurance Provider</label>
+                            <input type="text" id="insurance_provider" placeholder="e.g., NHIF, AAR, Britam">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label for="policy_number">Insurance/Policy Number</label>
+                            <input type="text" id="policy_number" placeholder="Enter your policy number">
+                        </div>
+
+                        <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 30px;">
+
+                        <!-- Additional Information -->
+                        <div class="section-title">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h3>Additional Information</h3>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="notes">Additional Notes or Special Requests</label>
+                            <textarea id="notes" rows="3"
+                                placeholder="Any allergies, medications, or special requirements..."></textarea>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">I consent to the collection and processing of my personal data for
+                                healthcare purposes <span class="required">*</span></label>
+                        </div>
+
+                        <div class="checkbox-group" style="margin-bottom: 30px;">
+                            <input type="checkbox" id="sms_reminders" name="sms_reminders" checked>
+                            <label for="sms_reminders">Send me SMS reminders about my appointment</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; border-radius: var(--radius-full); padding: 18px;">Confirm
+                            Booking</button>
+
+                    </form>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="appointment-sidebar">
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-phone-alt"></i> Need Help?</h4>
+                        <p>Call us directly to book your appointment or if you have any questions.</p>
+                        <a href="tel:+254700000000" class="call-btn"><i class="fas fa-phone"></i> +254 7XX XXX XXX</a>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-clock"></i> Operating Hours</h4>
+                        <ul>
+                            <li><strong>Monday - Friday:</strong> 8:00 AM - 6:00 PM</li>
+                            <li><strong>Saturday:</strong> 9:00 AM - 4:00 PM</li>
+                            <li><strong>Sunday:</strong> Closed</li>
+                            <li><strong>Emergency:</strong> 24/7</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-info-circle"></i> Booking Tips</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Book at least 24 hours in advance</li>
+                            <li><i class="fas fa-check"></i> Arrive 15 minutes early for your appointment</li>
+                            <li><i class="fas fa-check"></i> Bring your ID and insurance card</li>
+                            <li><i class="fas fa-check"></i> List all current medications</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="display: block; margin-bottom: 20px;">
+                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo">
+                    </a>
+                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. Trusted by
+                        families for over a decade.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="locations.html">Our Branches</a></li>
+                        <li><a href="appointment.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Medical Services</h4>
+                    <ul>
+                        <li><a href="services.html#diagnostics">Diagnostics</a></li>
+                        <li><a href="services.html#maternal">Maternal Care</a></li>
+                        <li><a href="services.html#family-planning">Family Planning</a></li>
+                        <li><a href="services.html#specialized">Specialized Clinics</a></li>
+                        <li><a href="services.html#pharmacy">Pharmacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get In Touch</h4>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> United
+                        Plaza, Murang’a</p>
+                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +254 7XX XXX XXX
+                    </p>
+                    <p><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i>
+                        info@focusclinical.co.ke</p>
+                    <p style="margin-top: 20px;"><a href="contact.html" class="btn btn-outline btn-sm"
+                            style="color: white; border-color: rgba(255,255,255,0.3);">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Focus Clinical and Diagnostics Centre Ltd. All Rights Reserved. | Designed by GMCreative
+                    | Powering digital healthcare.</p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <a href="admin/login.html" style="color: rgba(255,255,255,0.5); text-decoration: none;">
+                        <i class="fas fa-lock" style="margin-right: 5px;"></i>Staff Portal
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
