@@ -323,13 +323,28 @@
 
     <script src="js/scripts.js"></script>
     <script>
-        // Function to save contact to database (localStorage)
-        function saveContactToDatabase(data) {
+        // Function to save contact to database (cloud + local fallback)
+        async function saveContactToDatabase(data) {
+            // 1. Try Cloud Storage
+            try {
+                const response = await fetch('/api/storage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'contact', data })
+                });
+                if (response.ok) {
+                    console.log('Contact synced to cloud successfully');
+                }
+            } catch (err) {
+                console.warn('Cloud sync failed, saving to local only:', err);
+            }
+
+            // 2. Local Fallback
             const storageKey = 'focusContacts';
             const contacts = JSON.parse(localStorage.getItem(storageKey) || '[]');
-            data.id = Date.now().toString();
-            data.createdAt = new Date().toISOString();
-            data.status = 'unread';
+            data.id = data.id || Date.now().toString();
+            data.createdAt = data.createdAt || new Date().toISOString();
+            data.status = data.status || 'unread';
             contacts.push(data);
             localStorage.setItem(storageKey, JSON.stringify(contacts));
         }

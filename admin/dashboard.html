@@ -175,8 +175,8 @@
         requireAuth();
 
         // Load dashboard stats
-        function loadDashboard() {
-            const stats = getDashboardStats();
+        async function loadDashboard() {
+            const stats = await getDashboardStats();
 
             document.getElementById('totalAppointments').textContent = stats.totalAppointments;
             document.getElementById('pendingAppointments').textContent = stats.pendingAppointments;
@@ -184,7 +184,7 @@
             document.getElementById('unreadContacts').textContent = stats.unreadContacts;
 
             // Load recent appointments (last 5)
-            const appointments = getAppointments().slice(-5).reverse();
+            const appointments = (await getAppointments()).slice(-5).reverse();
             const appointmentsBody = document.querySelector('#recentAppointmentsTable tbody');
 
             if (appointments.length === 0) {
@@ -202,7 +202,7 @@
             }
 
             // Load recent contacts (last 5)
-            const contacts = getContacts().slice(-5).reverse();
+            const contacts = (await getContacts()).slice(-5).reverse();
             const contactsBody = document.querySelector('#recentContactsTable tbody');
 
             if (contacts.length === 0) {

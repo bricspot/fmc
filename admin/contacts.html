@@ -134,8 +134,8 @@
 
         let currentContactId = null;
 
-        function loadContacts() {
-            const contacts = getContacts().reverse();
+        async function loadContacts() {
+            const contacts = (await getContacts()).reverse();
             const tbody = document.querySelector('#contactsTable tbody');
 
             if (contacts.length === 0) {
@@ -164,16 +164,16 @@
             `).join('');
         }
 
-        function viewContact(id) {
+        async function viewContact(id) {
             currentContactId = id;
-            const contacts = getContacts();
+            const contacts = await getContacts();
             const c = contacts.find(contact => contact.id === id);
 
             if (!c) return;
 
             // Mark as read if unread
             if (c.status === 'unread') {
-                updateContactStatus(id, 'read');
+                await updateContactStatus(id, 'read');
             }
 
             document.getElementById('contactDetails').innerHTML = `
@@ -213,8 +213,8 @@
             const subject = encodeURIComponent(`Re: ${c.subject}`);
             const body = encodeURIComponent(`Dear ${c.name},\n\nThank you for contacting Focus Clinical and Diagnostics Centre.\n\n---\nOriginal Message:\n${c.message}\n---\n\nBest regards,\nFocus Clinical Team`);
             document.getElementById('replyBtn').href = `mailto:${c.email}?subject=${subject}&body=${body}`;
-            document.getElementById('replyBtn').onclick = function () {
-                updateContactStatus(id, 'replied');
+            document.getElementById('replyBtn').onclick = async function () {
+                await updateContactStatus(id, 'replied');
                 loadContacts();
             };
 
@@ -227,15 +227,15 @@
             loadContacts(); // Refresh to show updated status
         }
 
-        function removeContact(id) {
+        async function removeContact(id) {
             if (confirm('Are you sure you want to delete this message?')) {
-                deleteContact(id);
+                await deleteContact(id);
                 loadContacts();
             }
         }
 
-        function exportContactsCSV() {
-            const data = getContacts().map(c => ({
+        async function exportContactsCSV() {
+            const data = (await getContacts()).map(c => ({
                 'Name': c.name,
                 'Email': c.email,
                 'Phone': c.phone,
@@ -247,8 +247,8 @@
             exportToCSV(data, 'contact_messages');
         }
 
-        function exportContactsPDF() {
-            const data = getContacts().map(c => ({
+        async function exportContactsPDF() {
+            const data = (await getContacts()).map(c => ({
                 'Name': c.name,
                 'Email': c.email,
                 'Phone': c.phone || '-',

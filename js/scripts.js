@@ -209,13 +209,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to save appointment to database (localStorage)
-    function saveAppointmentToDatabase(data) {
+    // Function to save appointment to database (cloud + local fallback)
+    async function saveAppointmentToDatabase(data) {
+        // 1. Try Cloud Storage (Vercel KV)
+        try {
+            const response = await fetch('/api/storage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'appointment', data })
+            });
+            if (response.ok) {
+                console.log('Synced to cloud successfully');
+            }
+        } catch (err) {
+            console.warn('Cloud sync failed, saving to local only:', err);
+        }
+
+        // 2. Local Fallback (always keep a local copy)
         const storageKey = 'focusAppointments';
         const appointments = JSON.parse(localStorage.getItem(storageKey) || '[]');
-        data.id = Date.now().toString();
-        data.createdAt = new Date().toISOString();
-        data.status = 'pending';
+        data.id = data.id || Date.now().toString();
+        data.createdAt = data.createdAt || new Date().toISOString();
+        data.status = data.status || 'pending';
         appointments.push(data);
         localStorage.setItem(storageKey, JSON.stringify(appointments));
     }

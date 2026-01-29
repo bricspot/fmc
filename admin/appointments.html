@@ -135,8 +135,8 @@
 
         let currentAppointmentId = null;
 
-        function loadAppointments() {
-            const appointments = getAppointments().reverse();
+        async function loadAppointments() {
+            const appointments = (await getAppointments()).reverse();
             const tbody = document.querySelector('#appointmentsTable tbody');
 
             if (appointments.length === 0) {
@@ -171,9 +171,9 @@
             `).join('');
         }
 
-        function viewAppointment(id) {
+        async function viewAppointment(id) {
             currentAppointmentId = id;
-            const appointments = getAppointments();
+            const appointments = await getAppointments();
             const a = appointments.find(apt => apt.id === id);
 
             if (!a) return;
@@ -264,9 +264,9 @@
             currentAppointmentId = null;
         }
 
-        function confirmAppointment() {
+        async function confirmAppointment() {
             if (currentAppointmentId) {
-                updateAppointmentStatus(currentAppointmentId, 'confirmed');
+                await updateAppointmentStatus(currentAppointmentId, 'confirmed');
                 closeModal();
                 loadAppointments();
             }
@@ -286,8 +286,8 @@
             }
         }
 
-        function exportAppointmentsCSV() {
-            const data = getAppointments().map(a => ({
+        async function exportAppointmentsCSV() {
+            const data = (await getAppointments()).map(a => ({
                 'Patient Name': a.fullname,
                 'Phone': a.phone,
                 'Email': a.email,
@@ -308,8 +308,8 @@
             exportToCSV(data, 'appointments');
         }
 
-        function exportAppointmentsPDF() {
-            const data = getAppointments().map(a => ({
+        async function exportAppointmentsPDF() {
+            const data = (await getAppointments()).map(a => ({
                 'Patient': a.fullname,
                 'Phone': a.phone,
                 'Service': a.service,
