@@ -56,5 +56,35 @@ export default async function handler(req, res) {
         }
     }
 
+    // Handle PUT: Updating Data (e.g., Status)
+    if (method === 'PUT') {
+        try {
+            const { type, id, updates } = req.body;
+
+            if (!type || !id || !updates) {
+                return res.status(400).json({ error: 'Missing type, id, or updates' });
+            }
+
+            const key = type === 'appointment' ? 'focusAppointments' : 'focusContacts';
+
+            // Get existing data
+            const existing = await kv.get(key) || [];
+
+            // Find and update item
+            const index = existing.findIndex(item => item.id === id);
+
+            if (index !== -1) {
+                existing[index] = { ...existing[index], ...updates, updatedAt: new Date().toISOString() };
+                await kv.set(key, existing);
+                return res.status(200).json({ success: true });
+            }
+
+            return res.status(404).json({ error: 'Item not found' });
+        } catch (error) {
+            console.error('KV Error:', error);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+
     return res.status(405).json({ error: 'Method Not Allowed' });
 }

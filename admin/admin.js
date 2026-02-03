@@ -112,8 +112,20 @@ function saveAppointment(appointment) {
     return appointment;
 }
 
-function updateAppointmentStatus(id, status) {
-    const appointments = getAppointments();
+async function updateAppointmentStatus(id, status) {
+    // 1. Try Cloud Update
+    try {
+        await fetch('/api/storage', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'appointment', id, updates: { status } })
+        });
+    } catch (err) {
+        console.warn('Cloud update failed:', err);
+    }
+
+    // 2. Local Fallback
+    const appointments = localStorage.getItem(CONFIG.dataKeys.appointments) ? JSON.parse(localStorage.getItem(CONFIG.dataKeys.appointments)) : [];
     const index = appointments.findIndex(a => a.id === id);
     if (index !== -1) {
         appointments[index].status = status;
@@ -159,7 +171,19 @@ async function saveContact(contact) {
 }
 
 async function updateContactStatus(id, status) {
-    const contacts = await getContacts();
+    // 1. Try Cloud Update
+    try {
+        await fetch('/api/storage', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'contact', id, updates: { status } })
+        });
+    } catch (err) {
+        console.warn('Cloud update failed:', err);
+    }
+
+    // 2. Local Fallback
+    const contacts = localStorage.getItem(CONFIG.dataKeys.contacts) ? JSON.parse(localStorage.getItem(CONFIG.dataKeys.contacts)) : [];
     const index = contacts.findIndex(c => c.id === id);
     if (index !== -1) {
         contacts[index].status = status;
