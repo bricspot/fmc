@@ -619,3 +619,59 @@
         grid-template-columns: 1fr;
     }
 }
+
+                               /* ============================================
+   Mobile Responsive Enhancements
+   ============================================ */
+
+/* Mobile styles for smaller screens */
+@media (max-width: 480px) {
+       .admin-sidebar {
+                  width: 100%;
+                  transform: translateX(-100%);
+              }
+
+    .admin-sidebar.active {
+               transform: translateX(0);
+           }
+
+    .admin-main {
+               margin-left: 0;
+           }
+
+    .menu-toggle {
+               display: block !important;
+           }
+
+    .data-table {
+               font-size: 12px;
+           }
+
+    .data-table th,
+       .data-table td {
+                  padding: 8px 4px;
+              }
+
+    .stats-grid,
+       .dashboard-row {
+                  grid-template-columns: 1fr;
+              }
+
+    .modal {
+               width: 95%;
+               max-height: 90vh;
+               overflow-y: auto;
+           }
+
+    .detail-grid {
+               grid-template-columns: 1fr;
+           }
+
+    .admin-content {
+               padding: 15px;
+           }
+
+    .topbar-right {
+               display: none;
+           }
+   }
