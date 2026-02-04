@@ -205,7 +205,7 @@
     <script>
         // Check if already logged in
         if (isAdminLoggedIn()) {
-            window.location.href = 'dashboard.html';
+            window.location.href = '/admin/dashboard.html';
         }
 
         function togglePassword() {
@@ -228,7 +228,7 @@
             const password = document.getElementById('password').value;
 
             if (adminLogin(email, password)) {
-                window.location.href = 'dashboard.html';
+                window.location.href = '/admin/dashboard.html';
             } else {
                 document.getElementById('loginError').style.display = 'block';
             }
