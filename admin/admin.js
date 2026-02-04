@@ -102,33 +102,30 @@ async function getAppointments() {
     return data ? JSON.parse(data) : [];
 }
 
-function saveAppointment(appointment) {
-    const appointments = getAppointments();
+async function saveAppointment(appointment) {
+    const appointments = await getAppointments();
     appointment.id = Date.now().toString();
     appointment.createdAt = new Date().toISOString();
     appointment.status = 'pending';
     appointments.push(appointment);
-    localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(appointments));
-    return appointment;
+    await saveToCloud('appointments', appointments);    return appointment;
 }
 
-function updateAppointmentStatus(id, status) {
-    const appointments = getAppointments();
+async function updateAppointmentStatus(id, status) {
+    const appointments = await getAppointments();
     const index = appointments.findIndex(a => a.id === id);
     if (index !== -1) {
         appointments[index].status = status;
         appointments[index].updatedAt = new Date().toISOString();
-        localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(appointments));
-        return true;
+        await saveToCloud('appointments', appointments);        return true;
     }
     return false;
 }
 
-function deleteAppointment(id) {
-    const appointments = getAppointments();
+async function deleteAppointment(id) {
+    const appointments = await getAppointments();
     const filtered = appointments.filter(a => a.id !== id);
-    localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(filtered));
-}
+    await saveToCloud('appointments', appointments);}
 
 async function getContacts() {
     // 1. Try fetching from Cloud
@@ -154,8 +151,7 @@ async function saveContact(contact) {
     contact.createdAt = new Date().toISOString();
     contact.status = 'unread';
     contacts.push(contact);
-    localStorage.setItem(CONFIG.dataKeys.contacts, JSON.stringify(contacts));
-    return contact;
+    await saveToCloud('contacts', contacts);    return contact;
 }
 
 async function updateContactStatus(id, status) {
@@ -164,8 +160,7 @@ async function updateContactStatus(id, status) {
     if (index !== -1) {
         contacts[index].status = status;
         contacts[index].updatedAt = new Date().toISOString();
-        localStorage.setItem(CONFIG.dataKeys.contacts, JSON.stringify(contacts));
-        return true;
+        await saveToCloud('contacts', contacts);        return true;
     }
     return false;
 }
@@ -173,8 +168,7 @@ async function updateContactStatus(id, status) {
 async function deleteContact(id) {
     const contacts = await getContacts();
     const filtered = contacts.filter(c => c.id !== id);
-    localStorage.setItem(CONFIG.dataKeys.contacts, JSON.stringify(filtered));
-}
+    await saveToCloud('contacts', filtered);}
 
 // ============================================
 // Export Functions
@@ -284,7 +278,7 @@ async function getDashboardStats() {
 
 function formatDate(dateString) {
     if (!dateString) return '-';
-    const date = new Date(dateString);
+async     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', {
         day: '2-digit',
         month: 'short',
@@ -331,6 +325,7 @@ async function seedDemoData() {
         // ...
     }
 }
+
 
 // Note: Initialization now handled in specific pages to avoid top-level async issues
 // seedDemoData(); 
