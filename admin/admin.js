@@ -38,6 +38,25 @@ function adminLogin(email, password) {
     return false;
 }
 
+
+// ============================================
+// Cloud Storage Helper
+// ============================================
+
+async function saveToCloud(type, data) {
+        try {
+                    const password = localStorage.getItem(CONFIG.dataKeys.adminPassword) || CONFIG.defaultPassword;
+                    const response = await fetch('/api/storage', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ type, data, password })
+                                                });
+                    return response.ok;
+                } catch (err) {
+                    console.error('Cloud save failed:', err);
+                    return false;
+                }
+    }
 function adminLogout() {
     localStorage.removeItem(CONFIG.sessionKey);
     window.location.href = 'login';
@@ -125,7 +144,7 @@ async function updateAppointmentStatus(id, status) {
 async function deleteAppointment(id) {
     const appointments = await getAppointments();
     const filtered = appointments.filter(a => a.id !== id);
-    await saveToCloud('appointments', appointments);}
+    await saveToCloud('appointments', filtered);}
 
 async function getContacts() {
     // 1. Try fetching from Cloud
