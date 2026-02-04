@@ -278,7 +278,7 @@ async function getDashboardStats() {
 
 function formatDate(dateString) {
     if (!dateString) return '-';
-async     const date = new Date(dateString);
+     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', {
         day: '2-digit',
         month: 'short',
