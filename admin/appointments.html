@@ -272,10 +272,10 @@
             }
         }
 
-        function quickConfirm(id) {
+        async function quickConfirm(id) {
             if (confirm('Confirm this appointment?')) {
-                updateAppointmentStatus(id, 'confirmed');
-                loadAppointments();
+                await updateAppointmentStatus(id, 'confirmed');
+                await loadAppointments();
             }
         }
 
