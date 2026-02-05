@@ -136,7 +136,8 @@ async function updateAppointmentStatus(id, status) {
     if (index !== -1) {
         appointments[index].status = status;
         appointments[index].updatedAt = new Date().toISOString();
-        await saveToCloud('appointments', appointments);        return true;
+        await saveToCloud('appointments', appointments);    
+                localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(appointments));return true;
     }
     return false;
 }
