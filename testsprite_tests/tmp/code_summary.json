@@ -1,35 +1,67 @@
 {
-  "tech_stack": ["HTML5", "CSS3", "JavaScript (Vanilla)"],
+  "tech_stack": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
   "features": [
     {
-      "name": "Global Navigation",
-      "description": "Sticky header with scroll effects and a responsive mobile burger menu.",
-      "files": ["index.html", "js/scripts.js", "css/style.css"]
+      "name": "Homepage",
+      "description": "Main landing page with hero, services, and testimonials.",
+      "files": [
+        "index.html",
+        "js/scripts.js",
+        "css/styles.css"
+      ]
     },
     {
-      "name": "Testimonial Slider",
-      "description": "Dynamic auto-playing slider displaying patient testimonials with author details and images.",
-      "files": ["js/scripts.js"]
+      "name": "Booking Appointment",
+      "description": "Patient booking form and functionality.",
+      "files": [
+        "appointment.html",
+        "js/scripts.js"
+      ]
     },
     {
-      "name": "Appointment Booking System",
-      "description": "Interactive booking form on appointment.html and embedded in index.html with validation and simulated submission feedback.",
-      "files": ["appointment.html", "index.html", "js/scripts.js"]
+      "name": "Contact Page",
+      "description": "Contact form for user inquiries.",
+      "files": [
+        "contact.html",
+        "js/scripts.js"
+      ]
     },
     {
-      "name": "Service Information",
-      "description": "Detailed display of healthcare services, categories, and specialist information.",
-      "files": ["services.html", "index.html"]
+      "name": "Admin Dashboard",
+      "description": "Main admin dashboard showing overview stats.",
+      "files": [
+        "admin/dashboard.html",
+        "admin/admin.js",
+        "admin/admin-styles.css"
+      ]
     },
     {
-      "name": "Location Directory",
-      "description": "Information about clinic branches (Kerugoya, Ishiara) with contact details and operating hours.",
-      "files": ["locations.html"]
+      "name": "Admin Appointments",
+      "description": "Admin view for managing patient appointments (view, confirm, delete).",
+      "files": [
+        "admin/appointments.html",
+        "admin/admin.js"
+      ]
     },
     {
-      "name": "Scroll Animations",
-      "description": "Intersection Observer based reveal animations for sections and cards to enhance UX.",
-      "files": ["js/scripts.js"]
+      "name": "Admin Contacts",
+      "description": "Admin view for managing contact inquiries.",
+      "files": [
+        "admin/contacts.html",
+        "admin/admin.js"
+      ]
+    },
+    {
+      "name": "Admin Settings",
+      "description": "Admin settings for password change and data management.",
+      "files": [
+        "admin/settings.html",
+        "admin/admin.js"
+      ]
     }
   ]
 }

@@ -15,10 +15,13 @@
 </head>
 
 <body class="admin-body">
+    <!-- Overlay -->
+    <div class="sidebar-overlay"></div>
     <!-- Sidebar -->
     <aside class="admin-sidebar">
         <div class="sidebar-header">
-            <img src="../assets/images/admin-logo.png" alt="Focus Clinical" class="sidebar-logo">
+            <img src="../assets/images/admin-logo.png" alt="Focus Clinical" class="sidebar-logo logo-desktop">
+            <img src="../assets/images/logo-mark.png" alt="Focus Clinical" class="sidebar-logo logo-mobile">
         </div>
         <nav class="sidebar-nav">
             <a href="dashboard.html" class="nav-item">
@@ -232,9 +235,7 @@
             }
         }
 
-        function toggleSidebar() {
-            document.querySelector('.admin-sidebar').classList.toggle('active');
-        }
+
     </script>
 </body>
 

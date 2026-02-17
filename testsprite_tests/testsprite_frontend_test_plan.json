@@ -1,328 +1,603 @@
 [
   {
     "id": "TC001",
-    "title": "Sticky Global Navigation Visibility and Functionality on Desktop",
-    "description": "Verify that the global navigation header remains sticky and visible at the top during page scroll on desktop browsers, and all navigation links function correctly.",
+    "title": "Sticky global navigation remains fixed at top on scroll (desktop)",
+    "description": "Verify the header/navigation remains fixed to the top of the viewport when the user scrolls down the homepage on a desktop viewport.",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Open the website homepage on a desktop browser."
+        "description": "Open the homepage (index.html) in a desktop viewport (e.g., 1366x768)."
       },
       {
         "type": "action",
-        "description": "Scroll down the page slowly."
-      },
-      {
-        "type": "assertion",
-        "description": "Confirm the global navigation header remains fixed at the top of the viewport during scrolling."
+        "description": "Note the initial position of the global navigation/header."
       },
       {
         "type": "action",
-        "description": "Click each navigation link on the global header."
+        "description": "Scroll down the page by several screen heights."
       },
       {
         "type": "assertion",
-        "description": "Verify that each link navigates to the correct section or page as expected."
+        "description": "Check that the header element has CSS position fixed or sticky and remains visible at the top of the viewport during and after scrolling."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm header content (logo, primary nav links) are still accessible and clickable while sticky."
       }
     ]
   },
   {
     "id": "TC002",
-    "title": "Sticky Global Navigation Visibility and Burger Menu on Mobile",
-    "description": "Verify that the global navigation header is sticky, the burger menu is visible and functional on mobile viewports, and all navigation options work correctly.",
+    "title": "Sticky global navigation behavior on mobile with burger menu",
+    "description": "Verify the header stays sticky and the mobile burger menu opens/closes and remains accessible while scrolling on a mobile viewport.",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Open the website homepage on a mobile device or emulator with small screen size."
+        "description": "Open the homepage on a mobile viewport (e.g., 375x812)."
       },
       {
         "type": "action",
-        "description": "Scroll down the page."
-      },
-      {
-        "type": "assertion",
-        "description": "Confirm the global navigation header remains sticky and visible at the top during scrolling."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the burger menu icon is visible on the global navigation header."
+        "description": "Ensure the burger menu icon is visible in the header."
       },
       {
         "type": "action",
-        "description": "Tap the burger menu icon."
+        "description": "Tap the burger menu to open the navigation panel."
       },
       {
         "type": "assertion",
-        "description": "Confirm the navigation menu expands and displays all navigation links correctly."
+        "description": "Confirm the navigation panel is visible, links are present, and focus is set to the first menu item or close control."
       },
       {
         "type": "action",
-        "description": "Tap each navigation option."
+        "description": "Scroll the page while the menu is open."
       },
       {
         "type": "assertion",
-        "description": "Verify that each navigation option links to the appropriate page or section."
+        "description": "Verify the header remains sticky and the open menu does not detach or reposition incorrectly; menu close control remains usable."
+      },
+      {
+        "type": "action",
+        "description": "Tap the close control or the burger icon again to close the menu."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the menu closes and focus returns to the burger control."
       }
     ]
   },
   {
     "id": "TC003",
-    "title": "Testimonial Slider Auto-play and Loop Functionality",
-    "description": "Verify that the testimonial slider auto-plays smoothly, loops infinitely, and displays correct patient feedback with author images.",
-    "category": "functional",
+    "title": "Navigation keyboard accessibility and focus states",
+    "description": "Verify that the global navigation and burger menu are operable via keyboard and have visible focus indicators complying with accessibility checklist.",
+    "category": "accessibility",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the homepage where the testimonial slider is displayed."
-      },
-      {
-        "type": "assertion",
-        "description": "Check the first testimonial text and author image are displayed correctly."
+        "description": "Open the homepage on desktop."
       },
       {
         "type": "action",
-        "description": "Observe the slider for at least two full cycles or the equivalent display time of multiple testimonials."
+        "description": "Use Tab to navigate to header controls, including logo, nav links and (on narrow viewport) the burger menu."
       },
       {
         "type": "assertion",
-        "description": "Confirm the slider automatically advances slides smoothly without user interaction."
+        "description": "Ensure each interactive element receives keyboard focus and a visible focus outline or style is present."
+      },
+      {
+        "type": "action",
+        "description": "On mobile/narrow layout, open the burger menu via keyboard (Enter/Space) and navigate menu items using Tab/Shift+Tab and Arrow keys if supported."
       },
       {
         "type": "assertion",
-        "description": "Verify the slider loops infinitely, returning to the first testimonial after the last."
-      },
-      {
-        "type": "assertion",
-        "description": "Check that author images correspond correctly to the testimonial text displayed."
+        "description": "Confirm keyboard focus is trapped within the open menu until it is closed and that pressing Escape closes the menu and returns focus to the burger control."
       }
     ]
   },
   {
     "id": "TC004",
-    "title": "Appointment Booking Form Validation with All Valid Inputs",
-    "description": "Verify that submitting the appointment booking form with valid data displays a successful confirmation message.",
+    "title": "Testimonial slider autoplay, loop and author details",
+    "description": "Verify the testimonial slider auto-plays, advances slides at regular intervals, loops infinitely, and displays correct author name, role (if present) and image with alt text.",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the appointment booking page or open the embedded appointment form on the homepage."
+        "description": "Open the homepage where the testimonial slider is embedded."
       },
       {
         "type": "action",
-        "description": "Fill in all required form fields with valid information (name, contact info, date, time, healthcare service, specialist if applicable)."
-      },
-      {
-        "type": "action",
-        "description": "Submit the appointment booking form."
+        "description": "Observe the slider for at least three intervals (e.g., wait for 3 x configured interval length)."
       },
       {
         "type": "assertion",
-        "description": "Verify that client-side validation passes without errors."
+        "description": "Verify the slider advances automatically at consistent intervals without user interaction."
       },
       {
         "type": "assertion",
-        "description": "Check that the user receives a clear, user-friendly confirmation message indicating successful submission."
+        "description": "After reaching the last testimonial, confirm the slider loops back to the first testimonial and continues playing (infinite loop)."
+      },
+      {
+        "type": "assertion",
+        "description": "For each visible testimonial, confirm the author name text is present and an author image is shown with non-empty src and proper alt attribute describing the author."
       }
     ]
   },
   {
     "id": "TC005",
-    "title": "Appointment Booking Form Validation with Missing Required Fields",
-    "description": "Verify client-side validation prevents submission when required fields are missing, and appropriate error messages are shown.",
-    "category": "error handling",
-    "priority": "High",
+    "title": "Testimonial slider keyboard and reduced motion behavior",
+    "description": "Ensure the slider can be controlled by keyboard (prev/next if controls exist) and respects user's prefers-reduced-motion setting by disabling auto-play/animation when enabled.",
+    "category": "accessibility",
+    "priority": "Medium",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the appointment booking page or open the embedded appointment form."
-      },
-      {
-        "type": "action",
-        "description": "Partially fill the form leaving one or more required fields empty (e.g., no name or date)."
-      },
-      {
-        "type": "action",
-        "description": "Attempt to submit the appointment booking form."
+        "description": "Open the homepage and simulate a user with 'prefers-reduced-motion: reduce'."
       },
       {
         "type": "assertion",
-        "description": "Confirm form submission is blocked."
+        "description": "Confirm the slider does not auto-play or animate; content remains static or transitions are disabled."
+      },
+      {
+        "type": "action",
+        "description": "Restore normal motion preference. Focus on slider controls via keyboard and attempt to trigger next/previous using Enter/Space or arrow keys (depending on implementation)."
       },
       {
         "type": "assertion",
-        "description": "Verify clear and specific validation error messages appear next to each missing or invalid required field."
+        "description": "Confirm keyboard controls move slides and announce change focus appropriately (or set aria-live updates) so screen reader users can detect slide changes."
       }
     ]
   },
   {
     "id": "TC006",
-    "title": "Appointment Booking Form Validation with Invalid Input Formats",
-    "description": "Verify that client-side validation flags invalid inputs such as incorrect email or phone formats and prevents submission.",
-    "category": "error handling",
+    "title": "Appointment form - required fields validation (client-side)",
+    "description": "Verify that the appointment booking form validates required fields and shows inline validation messages before submission.",
+    "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Open the appointment booking form."
+        "description": "Open appointment.html or the embedded booking form on the homepage."
       },
       {
         "type": "action",
-        "description": "Enter invalid formats into fields (e.g., invalid email format, wrong phone number format)."
+        "description": "With all fields empty, click the form Submit button."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm client-side validation triggers and inline error messages are shown for each required field (name, contact, service selection, date/time as applicable)."
       },
       {
         "type": "action",
-        "description": "Attempt to submit the form."
+        "description": "Fill only some required fields and submit again."
       },
       {
         "type": "assertion",
-        "description": "Check that the form blocks submission."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the display of appropriate error messages indicating the invalid input format."
+        "description": "Verify validation still blocks submission and highlights the remaining missing fields with appropriate messages."
       }
     ]
   },
   {
     "id": "TC007",
-    "title": "Service Information Pages Content Accuracy and Display",
-    "description": "Verify that service information pages display comprehensive and accurate details about healthcare services, categories, and specialists.",
-    "category": "functional",
+    "title": "Appointment form - email, phone and date validation edge cases",
+    "description": "Confirm the form validates email format, phone number format, and date/time rules (no past dates) and provides clear error messages.",
+    "category": "error handling",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the service information page from the global navigation."
+        "description": "Open the appointment form."
+      },
+      {
+        "type": "action",
+        "description": "Enter an invalid email (e.g., 'user@@example', 'user.com') and attempt to submit."
       },
       {
         "type": "assertion",
-        "description": "Verify presence of all listed healthcare service categories."
+        "description": "Check the form shows an invalid-email message and prevents submission."
+      },
+      {
+        "type": "action",
+        "description": "Enter an invalid phone string (letters, too short) and attempt to submit."
       },
       {
         "type": "assertion",
-        "description": "Check that each category displays correct specialists relevant to that service."
+        "description": "Confirm the form flags phone format error and prevents submission."
+      },
+      {
+        "type": "action",
+        "description": "Enter a past date/time in the date/time fields and attempt to submit."
       },
       {
         "type": "assertion",
-        "description": "Confirm the accuracy of service descriptions and details consistent with clinic records."
+        "description": "Verify the form rejects past dates with a clear error indicating user must choose a future appointment date."
       }
     ]
   },
   {
     "id": "TC008",
-    "title": "Location Directory Display and Information Accuracy",
-    "description": "Verify that the locations page displays correct information for Kerugoya and Ishiara clinic branches, including contact info and operation hours.",
-    "category": "functional",
-    "priority": "High",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to the locations page via global navigation."
-      },
-      {
-        "type": "assertion",
-        "description": "Confirm both Kerugoya and Ishiara locations are listed."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the displayed contact information matches the clinic records."
-      },
-      {
-        "type": "assertion",
-        "description": "Check that operation hours are displayed correctly and completely for both locations."
-      }
-    ]
-  },
-  {
-    "id": "TC009",
-    "title": "Scroll-triggered Reveal Animations Functionality and Performance",
-    "description": "Validate that scroll-triggered animations reveal UI elements smoothly without layout shifts or significant performance degradation.",
+    "title": "Appointment form - real-time feedback and field-level validation",
+    "description": "Verify field-level validation occurs as the user types/selects (real-time feedback), including success indicators or removal of error messages when corrected.",
     "category": "functional",
     "priority": "Medium",
     "steps": [
       {
         "type": "action",
-        "description": "Load the homepage and start scrolling slowly down the page."
+        "description": "Open the appointment form."
+      },
+      {
+        "type": "action",
+        "description": "Type an invalid value into email, then correct it to a valid address without submitting."
       },
       {
         "type": "assertion",
-        "description": "Observe that content sections and cards reveal themselves as they enter the viewport."
+        "description": "Confirm the email error message is removed in real time and a success/valid indicator is optionally shown."
+      },
+      {
+        "type": "action",
+        "description": "Select a date/time and then change it to another valid slot."
       },
       {
         "type": "assertion",
-        "description": "Confirm that no sudden layout shifts occur when animations trigger."
+        "description": "Verify any slot availability indicator updates in real time and form-level validation state reflects the change."
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Appointment form - simulated submission and confirmation message",
+    "description": "Verify that a valid appointment form triggers the simulated submission workflow and displays a user-friendly confirmation message, without actual network submission.",
+    "category": "integration",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the appointment form and fill all required fields with valid data."
+      },
+      {
+        "type": "action",
+        "description": "Click Submit."
       },
       {
         "type": "assertion",
-        "description": "Verify smooth animation without jank or noticeable performance issues."
+        "description": "Confirm the UI shows a simulated submission state (e.g., spinner or 'Submitting...' message) for a short period and then displays a confirmation message indicating the appointment request was received."
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure the form is either reset or disabled to prevent duplicate submissions as per design, and that the confirmation message is accessible (aria-live or focus moved to message)."
       }
     ]
   },
   {
     "id": "TC010",
-    "title": "UI Components Neubomorphic Style Compliance and Accessibility",
-    "description": "Verify that all UI components such as buttons, cards, input fields, and modals adhere to the neumorphic style guidelines and accessibility standards including contrast, focus states, and motion preferences.",
-    "category": "ui",
-    "priority": "High",
+    "title": "Appointment form - server error simulation handling",
+    "description": "When the simulated submission returns an error state, verify the UI displays a clear error message and allows retry without losing user input.",
+    "category": "error handling",
+    "priority": "Medium",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate through multiple pages including homepage, appointment, and service pages."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify that all buttons and interactive elements follow neumorphic styling including shadows and highlights as per design system."
-      },
-      {
-        "type": "assertion",
-        "description": "Check all text and background contrasts meet accessibility guidelines."
+        "description": "Open the appointment form and fill all required fields."
       },
       {
         "type": "action",
-        "description": "Tab through focusable elements and observe visible and clear focus states."
+        "description": "Trigger the simulated submission flow but force a simulated error response (e.g., toggle a debug flag or mock failure)."
       },
       {
         "type": "assertion",
-        "description": "Confirm that focus states are consistent and meet accessibility standards."
+        "description": "Check that an error banner/message is displayed with actionable copy (e.g., 'Submission failed, please try again') and that the user's entered data remains in the form fields."
       },
       {
         "type": "action",
-        "description": "Enable system-level motion reduction preferences."
+        "description": "Attempt to resubmit after correcting any simulated issues."
       },
       {
         "type": "assertion",
-        "description": "Verify animations are reduced or disabled appropriately for users with motion preferences."
+        "description": "Confirm resubmission works and confirmation is shown on success."
       }
     ]
   },
   {
     "id": "TC011",
-    "title": "Responsive Behavior Verification Across Devices",
-    "description": "Ensure the website layout and features adapt properly and remain fully functional on a variety of screen sizes including desktop, tablet, and mobile.",
+    "title": "Services page - list of categories and specialists presence and links",
+    "description": "Verify services.html lists service categories and specialists, each entry includes a title, short description, and links to more detail or specialist profiles where applicable.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open services.html."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the page contains multiple service category cards/sections and each has a title and short description."
+      },
+      {
+        "type": "assertion",
+        "description": "For specialist listings, verify each specialist item includes a name, role/title, and a link to view more details. Links should be clickable and navigate to detail pages or sections."
+      },
+      {
+        "type": "action",
+        "description": "Click one service category link or specialist link."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the click navigates to the expected content without layout or styling regressions."
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Locations page - Kerugoya and Ishiara branch data, phone and hours",
+    "description": "Validate that the locations page lists both Kerugoya and Ishiara branches, each with address, operating hours in an expected format, and clickable contact links (tel: and mailto: if applicable).",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Open the website on devices or simulators representing desktop, tablet, and mobile screen sizes."
+        "description": "Open locations.html."
       },
       {
         "type": "assertion",
-        "description": "Verify that all key UI elements including navigation, forms, sliders, and content are displayed and usable without overflow or layout breaks."
+        "description": "Verify that entries for Kerugoya and Ishiara are present and visible on the page."
       },
       {
         "type": "assertion",
-        "description": "Confirm that the sticky header and burger menu behave correctly and remain accessible across all screen sizes."
+        "description": "For each branch, confirm there is an address line, contact phone number and operating hours displayed in a consistent format (e.g., Mon-Fri: 8:00–17:00)."
       },
       {
         "type": "assertion",
-        "description": "Check that interactive elements and text are sized appropriately for touch on smaller devices."
+        "description": "Confirm phone numbers are anchor elements with tel: href and that clicking/tapping initiates call intent on supported devices."
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Locations page - map/link and accessibility of contact info",
+    "description": "Ensure any map links or directions links are present and accessible, and contact information uses semantic HTML for screen readers.",
+    "category": "accessibility",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open locations.html and examine each branch card."
+      },
+      {
+        "type": "assertion",
+        "description": "If a map or directions link exists, confirm it has an accessible name and target (opens in new tab with rel='noopener' if external)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify contact info uses appropriate semantic markup (address element or aria-labels) so screen readers can read the location details correctly."
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Scroll-triggered reveal animations add visible class on entering viewport",
+    "description": "Verify elements intended to reveal via Intersection Observer receive the visible state (e.g., 'is-visible' class) when they enter the viewport and lose it when scrolled out if intended.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the homepage or a page with reveal sections."
+      },
+      {
+        "type": "action",
+        "description": "Scroll slowly down the page to bring reveal-target elements into the viewport."
+      },
+      {
+        "type": "assertion",
+        "description": "For each reveal-target element, check that the observer adds a visible class or toggles an attribute (e.g., 'is-visible' or 'data-visible=true') when the element crosses the reveal threshold."
+      },
+      {
+        "type": "action",
+        "description": "Scroll back up and out of viewport if implementation removes visibility when out of view."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the class/attribute toggles according to the implementation spec (either persistent after first reveal or toggling) and there are no console errors from Intersection Observer."
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Scroll animations do not cause layout shift and use transform/opacity",
+    "description": "Ensure reveal animations use transform/opacity rather than layout-affecting properties to avoid layout shifts and that elements have will-change/transition optimizations.",
+    "category": "performance",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the page with reveal animations and inspect the CSS rules applied to reveal-target elements."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm animation transitions animate transform and opacity properties (e.g., translateY, scale) rather than height/margin/position which cause layout shifts."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that elements have GPU-friendly hints (e.g., will-change: transform) and that no visible content jumps or reflows occur when reveal animations run."
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Neumorphic design style classes and component consistency",
+    "description": "Verify core UI components (buttons, cards, inputs, modals) include the expected neumorphic CSS utility classes and consistent elevation/rounded styling per design tokens.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open pages containing buttons, cards, inputs and modals."
+      },
+      {
+        "type": "assertion",
+        "description": "Inspect these components for presence of designated neumorphic classes (e.g., 'neumorphic', 'nm-card', 'nm-button') or the expected CSS variables for shadows, radii, and background colors."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm consistent border-radius and shadow tokens are applied across similar components and no component visually breaks the design system (e.g., missing background or incorrect contrast)."
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Responsive layout verification across breakpoints",
+    "description": "Ensure the website layout adapts correctly across key breakpoints (mobile, tablet, desktop) without overlapping content or broken layouts.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the homepage and services/appointments pages and test at multiple viewport widths: 320px, 375px, 768px, 1024px, 1366px."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm header, hero, cards, forms and sliders reflow appropriately (stacking, spacing, font sizing) at each breakpoint."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify no horizontal scrollbars appear and no content is clipped at any breakpoint."
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "UI contrast and focus state pre-delivery checklist",
+    "description": "Validate color contrast ratios for main text and interactive elements meet WCAG AA and focus states are visible per the pre-delivery accessibility checklist.",
+    "category": "accessibility",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open multiple key pages and capture computed foreground/background color values for primary text, buttons and nav links."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify contrast ratio meets at least WCAG AA thresholds (4.5:1 for normal text, 3:1 for large text)."
+      },
+      {
+        "type": "action",
+        "description": "Tab through interactive elements (links, buttons, inputs)."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm visible focus indicators are present and meet minimum size/contrast requirements (focus ring or clearly visible style)."
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Form inputs accessibility: labels, aria attributes, and error announcements",
+    "description": "Verify all form controls have associated labels, required inputs use aria-required/required attribute, and validation error messages are announced to screen readers.",
+    "category": "accessibility",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the appointment form and inspect DOM for each input, select and textarea."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm each form control has a visible label element associated via for/id or aria-label/aria-labelledby."
+      },
+      {
+        "type": "action",
+        "description": "Trigger validation errors by submitting an empty form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify error messages are connected to inputs using aria-describedby and/or appear in an aria-live region so screen readers announce them."
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Header navigation link targets and deep-linking",
+    "description": "Ensure header navigation links (internal anchors and page links) navigate to the correct sections and deep-linking preserves scroll position without breaking sticky header (i.e., content not hidden under header).",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Click header links that navigate to internal page anchors (e.g., #services, #locations) and to full pages (services.html, locations.html)."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the viewport scrolls to the correct section and the top of the target content is visible (not hidden under the sticky header); if needed, confirm page applies anchor offset to account for sticky header."
+      },
+      {
+        "type": "action",
+        "description": "Paste a deep link URL with an anchor into the address bar and load the page."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page loads and scrolls directly to the right section with header offset accounted for."
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Slider pause on hover/focus (if implemented) and manual controls",
+    "description": "If the design includes pause-on-hover or keyboard focus pause behavior for the testimonial slider, verify autoplay pauses on hover/focus and resumes after hover/focus is removed; also verify manual controls function.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the homepage to the testimonial slider."
+      },
+      {
+        "type": "action",
+        "description": "Hover the slider with the mouse and observe for one interval length."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm autoplay pauses while hovered if pause-on-hover behavior is specified."
+      },
+      {
+        "type": "action",
+        "description": "Move mouse away and wait one interval length."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify autoplay resumes after hover ends."
+      },
+      {
+        "type": "action",
+        "description": "Focus the slider controls via keyboard and use them to move to next/previous slides."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm manual control works and updates visible testimonial and any accessible announcements."
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Graceful degradation when JavaScript disabled",
+    "description": "Verify core content (service information, locations, contact details) and essential navigation remain accessible and readable when JavaScript is disabled (progressive enhancement).",
+    "category": "functional",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Disable JavaScript in the browser and load index.html and services.html and locations.html."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm essential content such as service descriptions, location addresses, operation hours and phone numbers are visible as static content."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify navigation links still work as standard anchor links and forms (if present) fall back to server-side or provide an informative message indicating JavaScript is required for interactive submission."
       }
     ]
   }

@@ -359,3 +359,37 @@ async function seedDemoData() {
 // Note: Initialization now handled in specific pages to avoid top-level async issues
 // seedDemoData(); 
 
+// ============================================
+// UI Interaction Functions
+// ============================================
+
+function toggleSidebar() {
+    const sidebar = document.querySelector('.admin-sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    // Check if we are in mobile view (768px matches CSS media query)
+    if (window.innerWidth <= 768) {
+        // Mobile: Toggle 'active' to show/hide
+        sidebar.classList.toggle('active');
+        if (overlay) {
+            overlay.classList.toggle('active');
+        }
+    } else {
+        // Desktop: Toggle 'collapsed' to hide/show
+        sidebar.classList.toggle('collapsed');
+    }
+}
+
+// Close sidebar when clicking overlay
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.querySelector('.sidebar-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            const sidebar = document.querySelector('.admin-sidebar');
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+    }
+});

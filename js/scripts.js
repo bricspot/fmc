@@ -16,103 +16,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Mobile Menu (Simple Sidebar) - Improved visibility
-    const createMobileMenu = () => {
-        const body = document.body;
-        const burger = document.createElement('button');
-        burger.className = 'mobile-burger';
-        burger.id = 'mobile-menu-toggle';
-        burger.setAttribute('aria-label', 'Open mobile menu');
-        burger.innerHTML = '<i class="fas fa-bars"></i>';
-        burger.style.cssText = `
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-main);
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1000;
-        `;
-
-        const headerActions = document.querySelector('.header-actions');
-        if (headerActions) {
-            headerActions.prepend(burger);
-        }
-
-        const overlay = document.createElement('div');
-        overlay.id = 'mobile-menu-overlay';
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1001;
-            display: none;
-            backdrop-filter: blur(5px);
-        `;
-
-        const menu = document.createElement('div');
-        menu.id = 'mobile-menu-sidebar';
-        menu.style.cssText = `
-            position: fixed;
-            top: 0; right: -300px; width: 300px; height: 100%;
-            background: white;
-            z-index: 1002;
-            padding: 40px 20px;
-            transition: all 0.4s ease;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-        `;
-
-        const closeBtn = document.createElement('button');
-        closeBtn.id = 'mobile-menu-close';
-        closeBtn.setAttribute('aria-label', 'Close mobile menu');
-        closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-        closeBtn.style.cssText = 'position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;';
-
+    // 2. Mobile Menu (Static HTML + CSS Classes) - Improved Performance
+    const initMobileMenu = () => {
+        const burger = document.getElementById('mobile-menu-toggle');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const menu = document.getElementById('mobile-menu-sidebar');
+        const closeBtn = document.getElementById('mobile-menu-close');
         const navLinks = document.querySelector('.nav-links');
-        if (navLinks) {
-            const links = navLinks.cloneNode(true);
-            links.style.display = 'flex';
-            links.style.flexDirection = 'column';
-            links.style.marginTop = '40px';
-            links.style.gap = '20px';
-            menu.appendChild(links);
+        const mobileNavContent = document.querySelector('.mobile-nav-content');
 
-            links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+        if (!burger || !menu || !overlay) return;
+
+        // Clone links if empty
+        if (navLinks && mobileNavContent && mobileNavContent.children.length === 0) {
+            const links = navLinks.querySelectorAll('a');
+            links.forEach(link => {
+                const mobileLink = link.cloneNode(true);
+                mobileLink.addEventListener('click', closeMenu);
+                mobileNavContent.appendChild(mobileLink);
+            });
         }
 
-        menu.appendChild(closeBtn);
-        body.appendChild(overlay);
-        body.appendChild(menu);
-
-        burger.addEventListener('click', () => {
-            overlay.style.display = 'block';
-            setTimeout(() => menu.style.right = '0', 10);
-        });
+        function openMenu() {
+            menu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
 
         function closeMenu() {
-            menu.style.right = '-300px';
-            setTimeout(() => overlay.style.display = 'none', 400);
-        };
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
+        burger.addEventListener('click', openMenu);
         closeBtn.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
 
-        // Media query listener for burger visibility
-        const updateBurgerVisibility = () => {
-            if (window.innerWidth <= 900) {
-                burger.style.display = 'block';
-            } else {
-                burger.style.display = 'none';
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
                 closeMenu();
             }
-        };
-
-        window.addEventListener('resize', updateBurgerVisibility);
-        updateBurgerVisibility();
+        });
     };
 
-    createMobileMenu();
+    initMobileMenu();
 
     // 3. Simple Testimonial Slider - Using reliable small images
     const testimonials = [

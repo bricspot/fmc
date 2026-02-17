@@ -15,10 +15,13 @@
 </head>
 
 <body class="admin-body">
+    <!-- Overlay -->
+    <div class="sidebar-overlay"></div>
     <!-- Sidebar -->
     <aside class="admin-sidebar">
         <div class="sidebar-header">
-            <img src="../assets/images/admin-logo.png" alt="Focus Clinical" class="sidebar-logo">
+            <img src="../assets/images/admin-logo.png" alt="Focus Clinical" class="sidebar-logo logo-desktop">
+            <img src="../assets/images/logo-mark.png" alt="Focus Clinical" class="sidebar-logo logo-mobile">
         </div>
         <nav class="sidebar-nav">
             <a href="dashboard.html" class="nav-item">
@@ -81,6 +84,21 @@
                 </div>
             </div>
 
+            <!-- Toolbar -->
+            <div class="table-toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search sender, email, or subject..."
+                        onkeyup="filterContacts()">
+                </div>
+                <select id="statusFilter" class="filter-select" onchange="filterContacts()">
+                    <option value="">All Statuses</option>
+                    <option value="unread">Unread</option>
+                    <option value="read">Read</option>
+                    <option value="replied">Replied</option>
+                </select>
+            </div>
+
             <!-- Contacts Table -->
             <div class="dashboard-card">
                 <div class="card-body" style="padding: 0;">
@@ -134,29 +152,62 @@
 
         let currentContactId = null;
 
+        let allContacts = [];
+
         async function loadContacts() {
-            const contacts = (await getContacts()).reverse();
+            allContacts = (await getContacts()).reverse();
+            filterContacts();
+        }
+
+        function filterContacts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+
+            const filtered = allContacts.filter(c => {
+                const matchesQuery = (c.name && c.name.toLowerCase().includes(query)) ||
+                    (c.email && c.email.toLowerCase().includes(query)) ||
+                    (c.subject && c.subject.toLowerCase().includes(query));
+
+                const matchesStatus = status === '' || c.status === status;
+
+                return matchesQuery && matchesStatus;
+            });
+
+            renderTable(filtered);
+        }
+
+        function renderTable(contacts) {
             const tbody = document.querySelector('#contactsTable tbody');
+            const noData = document.getElementById('noContacts');
+            const table = document.getElementById('contactsTable');
 
             if (contacts.length === 0) {
-                document.getElementById('noContacts').style.display = 'block';
-                document.getElementById('contactsTable').style.display = 'none';
+                noData.style.display = 'block';
+                table.style.display = 'none';
                 return;
             }
 
+            noData.style.display = 'none';
+            table.style.display = 'table';
+
             tbody.innerHTML = contacts.map(c => `
                 <tr>
-                    <td><strong>${c.name}</strong></td>
+                    <td>
+                        <a href="#" class="data-link" onclick="viewContact('${c.id}'); return false;">
+                            ${c.name}
+                        </a>
+                        ${c.status === 'unread' ? '<span class="badge badge-warning" style="margin-left: 5px; font-size: 0.6rem; padding: 2px 6px;">New</span>' : ''}
+                    </td>
                     <td>${c.email}</td>
                     <td>${c.phone || '-'}</td>
                     <td>${c.subject}</td>
                     <td>${formatDate(c.createdAt)}</td>
                     <td>${getStatusBadge(c.status)}</td>
                     <td class="actions">
-                        <button class="action-view" onclick="viewContact('${c.id}')">
+                        <button class="action-view" title="View" onclick="viewContact('${c.id}')">
                             <i class="fas fa-eye"></i>
                         </button>
-                        <button class="action-delete" onclick="removeContact('${c.id}')">
+                        <button class="action-delete" title="Delete" onclick="removeContact('${c.id}')">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
@@ -236,15 +287,17 @@
 
         async function exportContactsCSV() {
             const data = (await getContacts()).map(c => ({
-                'Name': c.name,
-                'Email': c.email,
-                'Phone': c.phone,
+                'ID': c.id,
+                'Full Name': c.name,
+                'Email Address': c.email,
+                'Phone Number': c.phone || 'N/A',
                 'Subject': c.subject,
-                'Message': c.message,
+                'Message Content': c.message,
                 'Status': c.status,
-                'Received': c.createdAt
+                'Received On': formatDateTime(c.createdAt),
+                'Last Updated': c.updatedAt ? formatDateTime(c.updatedAt) : '-'
             }));
-            exportToCSV(data, 'contact_messages');
+            exportToCSV(data, 'focus_clinical_messages');
         }
 
         async function exportContactsPDF() {
@@ -259,9 +312,7 @@
             exportToPDF(data, 'Contact Messages Report', 'contacts');
         }
 
-        function toggleSidebar() {
-            document.querySelector('.admin-sidebar').classList.toggle('active');
-        }
+
 
         // Initialize
         loadContacts();

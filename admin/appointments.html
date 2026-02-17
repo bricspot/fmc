@@ -15,10 +15,13 @@
 </head>
 
 <body class="admin-body">
+    <!-- Overlay -->
+    <div class="sidebar-overlay"></div>
     <!-- Sidebar -->
     <aside class="admin-sidebar">
         <div class="sidebar-header">
-            <img src="../assets/images/admin-logo.png" alt="Focus Clinical" class="sidebar-logo">
+            <img src="../assets/images/admin-logo.png" alt="Focus Clinical" class="sidebar-logo logo-desktop">
+            <img src="../assets/images/logo-mark.png" alt="Focus Clinical" class="sidebar-logo logo-mobile">
         </div>
         <nav class="sidebar-nav">
             <a href="dashboard.html" class="nav-item">
@@ -81,6 +84,22 @@
                 </div>
             </div>
 
+            <!-- Toolbar -->
+            <div class="table-toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search patients, services, or phone..."
+                        onkeyup="filterAppointments()">
+                </div>
+                <select id="statusFilter" class="filter-select" onchange="filterAppointments()">
+                    <option value="">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+
             <!-- Appointments Table -->
             <div class="dashboard-card">
                 <div class="card-body" style="padding: 0;">
@@ -134,41 +153,108 @@
         requireAuth();
 
         let currentAppointmentId = null;
+        let allAppointments = [];
+        let conflictIds = new Set(); // Store IDs of conflicting appointments
 
         async function loadAppointments() {
-            const appointments = (await getAppointments()).reverse();
+            allAppointments = (await getAppointments()).reverse();
+            checkForConflicts(allAppointments); // Identify double bookings
+            filterAppointments();
+        }
+
+        function checkForConflicts(appointments) {
+            conflictIds.clear();
+            const timeSlots = {};
+
+            // Group by [Branch + Date + Time]
+            appointments.forEach(a => {
+                if (a.status !== 'cancelled' && a.status !== 'rejected') {
+                    const key = `${a.branch || 'main'}-${a.date}-${a.time}`;
+                    if (timeSlots[key]) {
+                        // Mark both as conflicts
+                        conflictIds.add(timeSlots[key]);
+                        conflictIds.add(a.id);
+                    } else {
+                        timeSlots[key] = a.id;
+                    }
+                }
+            });
+        }
+
+        function filterAppointments() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+
+            const filtered = allAppointments.filter(a => {
+                const matchesQuery = (a.fullname && a.fullname.toLowerCase().includes(query)) ||
+                    (a.phone && a.phone.includes(query)) ||
+                    (a.service && a.service.toLowerCase().includes(query)) ||
+                    (a.email && a.email.toLowerCase().includes(query));
+
+                const matchesStatus = status === '' || a.status === status;
+
+                return matchesQuery && matchesStatus;
+            });
+
+            renderTable(filtered);
+        }
+
+        function renderTable(appointments) {
             const tbody = document.querySelector('#appointmentsTable tbody');
+            const noData = document.getElementById('noAppointments');
+            const table = document.getElementById('appointmentsTable');
 
             if (appointments.length === 0) {
-                document.getElementById('noAppointments').style.display = 'block';
-                document.getElementById('appointmentsTable').style.display = 'none';
+                noData.style.display = 'block';
+                table.style.display = 'none';
                 return;
             }
 
-            tbody.innerHTML = appointments.map(a => `
-                <tr>
-                    <td><strong>${a.fullname}</strong></td>
+            noData.style.display = 'none';
+            table.style.display = 'table';
+
+            tbody.innerHTML = appointments.map(a => {
+                const isConflict = conflictIds.has(a.id);
+                // Override status badge if conflict exists and it's not cancelled
+                const conflictBadge = isConflict && a.status !== 'cancelled' ?
+                    `<span class="badge badge-error" style="background-color: #fee2e2; color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Conflict</span>` : '';
+
+                return `
+                <tr class="${isConflict ? 'row-conflict' : ''}" style="${isConflict ? 'background-color: #fff1f2;' : ''}">
+                    <td>
+                        <a href="#" class="data-link" onclick="viewAppointment('${a.id}'); return false;">
+                            ${a.fullname}
+                        </a>
+                    </td>
                     <td>${a.phone}</td>
                     <td>${a.service}</td>
                     <td>${a.branch ? a.branch.charAt(0).toUpperCase() + a.branch.slice(1) : '-'}</td>
                     <td>${formatDate(a.date)}</td>
                     <td>${a.time}</td>
-                    <td>${getStatusBadge(a.status)}</td>
+                    <td>
+                        <div style="display: flex; gap: 5px; flex-direction: column;">
+                            ${getStatusBadge(a.status)}
+                            ${conflictBadge}
+                        </div>
+                    </td>
                     <td class="actions">
-                        <button class="action-view" onclick="viewAppointment('${a.id}')">
+                        <button class="action-view" title="View Details" onclick="viewAppointment('${a.id}')">
                             <i class="fas fa-eye"></i>
                         </button>
-                        ${a.status === 'pending' ? `
-                            <button class="action-confirm" onclick="quickConfirm('${a.id}')">
+                        ${a.status === 'pending' || isConflict ? `
+                            <button class="action-confirm" title="Confirm" onclick="quickConfirm('${a.id}')" style="color: var(--success);">
                                 <i class="fas fa-check"></i>
                             </button>
+                            <button class="action-reschedule" title="Request Reschedule (Double Booked)" onclick="sendRescheduleEmail('${a.id}')" style="color: var(--warning); border: 1px solid var(--border-color); background: white;">
+                                <i class="fas fa-clock"></i>
+                            </button>
                         ` : ''}
-                        <button class="action-delete" onclick="removeAppointment('${a.id}')">
+                        <button class="action-delete" title="Delete" onclick="removeAppointment('${a.id}')">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
                 </tr>
-            `).join('');
+            `}).join('');
         }
 
         async function viewAppointment(id) {
@@ -178,8 +264,16 @@
 
             if (!a) return;
 
+            const isConflict = conflictIds.has(a.id);
+
             document.getElementById('appointmentDetails').innerHTML = `
                 <div class="detail-grid">
+                    ${isConflict ? `
+                    <div class="detail-item full" style="background: #fff1f2; border: 1px solid #fecaca; padding: 10px; border-radius: 6px;">
+                        <div class="detail-label" style="color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Scheduling Conflict Detected</div>
+                        <div class="detail-value" style="color: #7f1d1d;">This slot is double-booked. Please reschedule one of the appointments.</div>
+                    </div>
+                    ` : ''}
                     <div class="detail-item">
                         <div class="detail-label">Full Name</div>
                         <div class="detail-value">${a.fullname}</div>
@@ -224,15 +318,11 @@
                         <div class="detail-label">Patient Status</div>
                         <div class="detail-value">${a.firstVisit ? '<span class="badge badge-info">New Patient</span>' : '<span class="badge">Returning</span>'}</div>
                     </div>
-                    <div class="detail-item">
-                        <div class="detail-label">SMS Reminders</div>
-                        <div class="detail-value">${a.smsReminders ? '<span class="badge badge-success">Yes</span>' : '<span class="badge badge-warning">No</span>'}</div>
-                    </div>
                     <div class="detail-item full">
                         <div class="detail-label">Reason for Visit</div>
                         <div class="detail-value">${a.reason || 'Not specified'}</div>
                     </div>
-                    ${a.insuranceProvider ? `
+                     ${a.insuranceProvider ? `
                     <div class="detail-item">
                         <div class="detail-label">Insurance Provider</div>
                         <div class="detail-value">${a.insuranceProvider}</div>
@@ -253,8 +343,21 @@
                 </div>
             `;
 
-            // Show/hide confirm button based on status
-            document.getElementById('confirmBtn').style.display = a.status === 'pending' ? 'inline-flex' : 'none';
+            // Adjust buttons for conflict resolution
+            const footerHtml = `
+                <button class="btn btn-outline" onclick="closeModal()">Close</button>
+                <div style="display: flex; gap: 10px;">
+                     <button class="btn btn-warning" onclick="sendRescheduleEmail('${a.id}')" style="background-color: #f59e0b; color: white; border: none;">
+                        <i class="fas fa-clock"></i> Suggest Reschedule
+                    </button>
+                    ${a.status === 'pending' ? `
+                    <button class="btn btn-primary" id="confirmBtn" onclick="confirmAppointment()">
+                        <i class="fas fa-check"></i> Confirm
+                    </button>
+                    ` : ''}
+                </div>
+            `;
+            document.querySelector('.modal-footer').innerHTML = footerHtml;
 
             document.getElementById('viewModal').classList.add('active');
         }
@@ -266,17 +369,116 @@
 
         async function confirmAppointment() {
             if (currentAppointmentId) {
+                const appointments = await getAppointments();
+                const apt = appointments.find(a => a.id === currentAppointmentId);
+
                 await updateAppointmentStatus(currentAppointmentId, 'confirmed');
                 closeModal();
                 loadAppointments();
+
+                if (apt && apt.email) {
+                    if (confirm(`Appointment confirmed. Open email client to send confirmation to ${apt.email}?`)) {
+                        sendConfirmationEmail(apt);
+                    }
+                }
             }
         }
 
-        function quickConfirm(id) {
+        async function quickConfirm(id) {
             if (confirm('Confirm this appointment?')) {
-                updateAppointmentStatus(id, 'confirmed');
+                const appointments = await getAppointments();
+                const apt = appointments.find(a => a.id === id);
+
+                await updateAppointmentStatus(id, 'confirmed');
                 loadAppointments();
+
+                if (apt && apt.email) {
+                    if (confirm(`Appointment confirmed. Open email client to send confirmation to ${apt.email}?`)) {
+                        sendConfirmationEmail(apt);
+                    }
+                }
             }
+        }
+
+        function sendConfirmationEmail(appointment) {
+            const subject = `Appointment Confirmation - Focus Clinical`;
+            const branchName = appointment.branch ? appointment.branch.charAt(0).toUpperCase() + appointment.branch.slice(1) : 'Main Branch';
+            const body = `Dear ${appointment.fullname},
+
+We are pleased to confirm your appointment with Focus Clinical and Diagnostics Centre.
+
+Appointment Details:
+--------------------------------------------------
+Service: ${appointment.service}
+Date: ${formatDate(appointment.date)}
+Time: ${appointment.time}
+Location: ${branchName}
+--------------------------------------------------
+
+Please arrive 10 minutes prior to your scheduled time.
+Please carry your ID and Insurance Card (if applicable).
+
+If you have any questions or need to reschedule, please contact us at info@focusclinical.co.ke.
+
+Best regards,
+Focus Clinical Team`;
+
+            window.location.href = `mailto:${appointment.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        async function sendRescheduleEmail(id) {
+            // Find appointment locally first or fetch
+            let apt = allAppointments.find(a => a.id === id);
+            if (!apt) {
+                const appointments = await getAppointments();
+                apt = appointments.find(a => a.id === id);
+            }
+
+            if (!apt) {
+                alert('Appointment not found');
+                return;
+            }
+
+            if (!apt.email) {
+                alert('This patient does not have an email address provided.');
+                return;
+            }
+
+            // Mark as 'rescheduled' or 'pending' remains? Let's just send the email first.
+            // Optional: update status to 'pending-reschedule' if supported, but for now just send email.
+
+            const subject = `Action Required: Reschedule Appointment at Focus Clinical`;
+            const branchName = apt.branch ? apt.branch.charAt(0).toUpperCase() + apt.branch.slice(1) : 'Main Branch';
+
+            // Generate some alternative suggestons (next day same time, or 2 days later)
+            const dateObj = new Date(apt.date);
+            const nextDay = new Date(dateObj); nextDay.setDate(dateObj.getDate() + 1);
+            const nextNextDay = new Date(dateObj); nextNextDay.setDate(dateObj.getDate() + 2);
+
+            const body = `Dear ${apt.fullname},
+
+Thank you for choosing Focus Clinical and Diagnostics Centre.
+
+Regarding your requested appointment for:
+Service: ${apt.service}
+Date: ${formatDate(apt.date)}
+Time: ${apt.time}
+
+Unfortunately, this specific slot is currently unavailable or fully booked.
+
+We kindly request you to select an alternative date or time.
+Suggested alternatives:
+1. ${formatDate(nextDay.toISOString().split('T')[0])} at ${apt.time}
+2. ${formatDate(nextNextDay.toISOString().split('T')[0])} at ${apt.time}
+
+Please reply to this email to confirm one of the above, or visit our website to book a new slot that suits your schedule.
+
+We apologize for any inconvenience caused.
+
+Best regards,
+Focus Clinical Team`;
+
+            window.location.href = `mailto:${apt.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
 
         function removeAppointment(id) {
@@ -288,24 +490,26 @@
 
         async function exportAppointmentsCSV() {
             const data = (await getAppointments()).map(a => ({
-                'Patient Name': a.fullname,
-                'Phone': a.phone,
+                'ID': a.id,
+                'Full Name': a.fullname,
                 'Email': a.email,
-                'DOB': a.dob,
-                'ID Number': a.idNumber,
+                'Phone': a.phone,
+                'Date of Birth': formatDate(a.dob),
+                'ID/Passport': a.idNumber,
                 'Service': a.service,
                 'Branch': a.branch,
-                'Date': a.date,
-                'Time': a.time,
-                'Reason': a.reason,
-                'First Visit': a.firstVisit ? 'Yes' : 'No',
-                'Insurance': a.insuranceProvider || 'N/A',
-                'Policy No': a.policyNumber || 'N/A',
+                'Appointment Date': formatDate(a.date),
+                'Appointment Time': a.time,
+                'Reason for Visit': a.reason,
+                'New Patient': a.firstVisit ? 'Yes' : 'No',
+                'Insurance Provider': a.insuranceProvider || 'None',
+                'Policy Number': a.policyNumber || 'N/A',
+                'SMS Reminders': a.smsReminders ? 'Yes' : 'No',
                 'Status': a.status,
-                'Notes': a.notes,
-                'Submitted': a.createdAt
+                'Admin Notes': a.notes,
+                'Submission Date': formatDateTime(a.createdAt)
             }));
-            exportToCSV(data, 'appointments');
+            exportToCSV(data, 'focus_clinical_appointments');
         }
 
         async function exportAppointmentsPDF() {
@@ -317,11 +521,7 @@
                 'Date': formatDate(a.date),
                 'Status': a.status
             }));
-            exportToPDF(data, 'Appointment Requests Report', 'appointments');
-        }
-
-        function toggleSidebar() {
-            document.querySelector('.admin-sidebar').classList.toggle('active');
+            exportToPDF(data, 'Focus Clinical - Appointment Requests', 'focus_appointments_report');
         }
 
         // Initialize
