@@ -392,7 +392,7 @@
                 const apt = appointments.find(a => a.id === id);
 
                 await updateAppointmentStatus(id, 'confirmed');
-                loadAppointments();
+                await loadAppointments();
 
                 if (apt && apt.email) {
                     if (confirm(`Appointment confirmed. Open email client to send confirmation to ${apt.email}?`)) {

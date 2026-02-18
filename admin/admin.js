@@ -38,9 +38,28 @@ function adminLogin(email, password) {
     return false;
 }
 
+
+// ============================================
+// Cloud Storage Helper
+// ============================================
+
+async function saveToCloud(type, data) {
+    try {
+        const password = localStorage.getItem(CONFIG.dataKeys.adminPassword) || CONFIG.defaultPassword;
+        const response = await fetch('/api/storage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type, data, password })
+        });
+        return response.ok;
+    } catch (err) {
+        console.error('Cloud save failed:', err);
+        return false;
+    }
+}
 function adminLogout() {
     localStorage.removeItem(CONFIG.sessionKey);
-    window.location.href = 'login.html';
+    window.location.href = 'login';
 }
 
 function isAdminLoggedIn() {
@@ -62,7 +81,7 @@ function isAdminLoggedIn() {
 
 function requireAuth() {
     if (!isAdminLoggedIn()) {
-        window.location.href = 'login.html';
+        window.location.href = 'login';
         return false;
     }
     return true;
@@ -109,65 +128,27 @@ async function saveAppointment(appointment) {
     appointment.status = 'pending';
     appointments.push(appointment);
     localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(appointments));
-
-    // Try to sync with cloud
-    try {
-        await fetch('/api/storage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type: 'appointment', data: appointment })
-        });
-    } catch (err) {
-        console.warn('Sync to cloud failed:', err);
-    }
-
+    await saveToCloud('appointments', appointments);
     return appointment;
 }
 
 async function updateAppointmentStatus(id, status) {
-    // 1. Try Cloud Update
-    try {
-        const password = getStoredPassword();
-        const response = await fetch('/api/storage', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type: 'appointment', id, updates: { status }, password })
-        });
-        if (!response.ok) throw new Error('Cloud update failed');
-    } catch (err) {
-        console.warn('Cloud update failed:', err);
-    }
-
-    // 2. Local Fallback
     const appointments = await getAppointments();
     const index = appointments.findIndex(a => a.id === id);
     if (index !== -1) {
         appointments[index].status = status;
         appointments[index].updatedAt = new Date().toISOString();
-        localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(appointments));
-        return true;
+        await saveToCloud('appointments', appointments);
+        localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(appointments)); return true;
     }
     return false;
 }
 
 async function deleteAppointment(id) {
-    // 1. Try Cloud Delete
-    try {
-        const password = getStoredPassword();
-        const response = await fetch('/api/storage', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type: 'appointment', id, password })
-        });
-        if (!response.ok) throw new Error('Cloud delete failed');
-    } catch (err) {
-        console.warn('Cloud delete failed:', err);
-    }
-
-    // 2. Local Fallback
     const appointments = await getAppointments();
     const filtered = appointments.filter(a => a.id !== id);
     localStorage.setItem(CONFIG.dataKeys.appointments, JSON.stringify(filtered));
+    await saveToCloud('appointments', filtered);
 }
 
 async function getContacts() {
@@ -229,18 +210,7 @@ async function saveContact(contact) {
     contact.status = 'unread';
     contacts.push(contact);
     localStorage.setItem(CONFIG.dataKeys.contacts, JSON.stringify(contacts));
-
-    // Try to sync with cloud
-    try {
-        await fetch('/api/storage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type: 'contact', data: contact })
-        });
-    } catch (err) {
-        console.warn('Sync to cloud failed:', err);
-    }
-
+    await saveToCloud('contacts', contacts);
     return contact;
 }
 
@@ -264,8 +234,7 @@ async function updateContactStatus(id, status) {
     if (index !== -1) {
         contacts[index].status = status;
         contacts[index].updatedAt = new Date().toISOString();
-        localStorage.setItem(CONFIG.dataKeys.contacts, JSON.stringify(contacts));
-        return true;
+        await saveToCloud('contacts', contacts); return true;
     }
     return false;
 }
@@ -287,7 +256,7 @@ async function deleteContact(id) {
     // 2. Local Fallback
     const contacts = await getContacts();
     const filtered = contacts.filter(c => c.id !== id);
-    localStorage.setItem(CONFIG.dataKeys.contacts, JSON.stringify(filtered));
+    await saveToCloud('contacts', filtered);
 }
 
 // ============================================
@@ -445,6 +414,7 @@ async function seedDemoData() {
         // ...
     }
 }
+
 
 // Note: Initialization now handled in specific pages to avoid top-level async issues
 // seedDemoData(); 
