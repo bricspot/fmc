@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus Clinical and Diagnostics Centre Ltd | Quality Healthcare in Murang’a, Embu, Ishiara & Kerugoya</title>
+    <title>Focus Clinical and Diagnostics Centre Ltd | Quality Healthcare in Kerugoya, Murang'a, Embu, Mwea & Ishiara
+    </title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Focus Clinical and Diagnostics Centre Ltd provides integrated outpatient, maternal & child health, and advanced diagnostic services in Murang’a, Embu, Ishiara, and Kerugoya.">
+        content="Focus Clinical and Diagnostics Centre Ltd provides integrated outpatient, specialist consultations, advanced diagnostics, X-ray, ultrasound, ECG, dental, optical, pharmacy and laboratory services in Kerugoya, Murang'a, Embu, Mwea, and Ishiara. ISO 15189:2022 accredited labs.">
     <meta name="keywords"
-        content="Focus Clinical, outpatient clinic, diagnostics, Murang’a, Embu, Kerugoya, maternal health">
+        content="Focus Clinical, outpatient clinic, diagnostics, Murang'a, Embu, Kerugoya, Mwea, Ishiara, ISO 15189, ultrasound, X-ray, ECG, dental, optical, pharmacy, laboratory">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
@@ -27,6 +28,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/accordion.css">
 </head>
 
 <body>
@@ -35,8 +37,10 @@
     <div class="top-bar">
         <div class="container">
             <div class="top-info">
-                <span><i class="fas fa-phone"></i> +254 7XX XXX XXX</span>
-                <span><i class="fas fa-envelope"></i> info@focusclinical.co.ke</span>
+                <span><i class="fas fa-phone"></i> <a href="tel:+254717652857"
+                        style="color: inherit; text-decoration: none;">0717 652 857</a></span>
+                <span><i class="fab fa-whatsapp"></i> <a href="https://wa.me/254717652857"
+                        style="color: inherit; text-decoration: none;">WhatsApp Us</a></span>
                 <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
             </div>
             <div class="top-social">
@@ -128,7 +132,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 50px;">
-                    <a href="about.html" class="btn btn-outline"
+                    <a href="about.html" class="btn btn-primary"
                         style="padding: 15px 40px; border-radius: var(--radius-full);">Learn More About Us <i
                             class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
                 </div>
@@ -140,55 +144,93 @@
             <div class="container">
                 <div style="text-align: center; margin-bottom: var(--space-xl);">
                     <span class="badge">Medical Departments</span>
-                    <h2>Our Specialist Services</h2>
+                    <h2>Our Services</h2>
+                    <p style="max-width: 700px; margin: 10px auto 0;">Comprehensive healthcare under one roof across our
+                        9 branches.</p>
                 </div>
                 <div class="services-grid">
                     <div class="service-card">
-                        <div class="service-icon-box"><i class="fas fa-baby"></i></div>
-                        <div class="service-info">
-                            <h3>Maternal & Child Health</h3>
-                            <p>Antenatal care, child immunization, and growth monitoring for a healthy start.</p>
-                        </div>
-                    </div>
-                    <div class="service-card">
                         <div class="service-icon-box"><i class="fas fa-stethoscope"></i></div>
                         <div class="service-info">
-                            <h3>Outpatient Care</h3>
-                            <p>General consultations and emergency visits available round the clock.</p>
+                            <h3>General Consultations</h3>
+                            <p>Experienced doctors for diagnosis, treatment, and chronic disease management.</p>
                         </div>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon-box"><i class="fas fa-microscope"></i></div>
+                        <div class="service-icon-box"><i class="fas fa-user-md"></i></div>
                         <div class="service-info">
-                            <h3>Advanced Diagnostics</h3>
-                            <p>High-end ultrasound, laboratory testing, and molecular biology.</p>
+                            <h3>Specialist Consultations</h3>
+                            <p>Obstetrics, surgery, pediatrics, orthopedics, ENT, dermatology & more.</p>
                         </div>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon-box"><i class="fas fa-pills"></i></div>
+                        <div class="service-icon-box"><i class="fas fa-baby"></i></div>
                         <div class="service-info">
-                            <h3>Pharmacy Services</h3>
-                            <p>Fully stocked retail pharmacy with dedicated clinical pharmacist support.</p>
+                            <h3>CWC Clinics</h3>
+                            <p>Child welfare clinics with immunization, growth monitoring & maternal care.</p>
                         </div>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon-box"><i class="fas fa-users"></i></div>
+                        <div class="service-icon-box"><i class="fas fa-x-ray"></i></div>
                         <div class="service-info">
-                            <h3>Family Planning</h3>
-                            <p>Range of family planning methods tailored to your lifestyle and choice.</p>
+                            <h3>X-Ray & Imaging</h3>
+                            <p>Digital X-ray imaging for fast, accurate diagnosis with minimal radiation.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon-box"><i class="fas fa-wave-square"></i></div>
+                        <div class="service-info">
+                            <h3>Ultrasound</h3>
+                            <p>High-definition 3D/4D ultrasound for obstetric and diagnostic imaging.</p>
                         </div>
                     </div>
                     <div class="service-card">
                         <div class="service-icon-box"><i class="fas fa-heartbeat"></i></div>
                         <div class="service-info">
-                            <h3>Specialized Care</h3>
-                            <p>Nutrition counselling, mental health, dental and optical services.</p>
+                            <h3>Echocardiograms & ECG</h3>
+                            <p>Non-invasive cardiac imaging and heart rhythm testing for cardiac health.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon-box"><i class="fas fa-tooth"></i></div>
+                        <div class="service-info">
+                            <h3>Dental Services</h3>
+                            <p>Complete dental care including checkups, fillings, extractions & hygiene.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon-box"><i class="fas fa-eye"></i></div>
+                        <div class="service-info">
+                            <h3>Optical Services</h3>
+                            <p>Comprehensive eye exams, prescription glasses & eye health screening.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon-box"><i class="fas fa-pills"></i></div>
+                        <div class="service-info">
+                            <h3>Pharmacy</h3>
+                            <p>Fully stocked pharmacy with clinical pharmacist support & counselling.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon-box"><i class="fas fa-microscope"></i></div>
+                        <div class="service-info">
+                            <h3>Laboratory Services</h3>
+                            <p>ISO 15189:2022 accredited labs for haematology, biochemistry & more.</p>
                         </div>
                     </div>
                 </div>
+                <!-- ISO Accreditation Badge -->
+                <div
+                    style="text-align: center; margin-top: var(--space-lg); padding: 20px; background: linear-gradient(135deg, rgba(122,193,67,0.1), rgba(236,26,120,0.05)); border-radius: var(--radius-lg); border: 1px solid rgba(122,193,67,0.2);">
+                    <p style="margin: 0; font-weight: 600; color: var(--primary);"><i class="fas fa-award"
+                            style="margin-right: 8px;"></i>Our Kerugoya and Murang'a Laboratories are ISO 15189:2022
+                        Accredited</p>
+                </div>
                 <div style="text-align: center; margin-top: var(--space-lg);">
-                    <a href="services.html" class="btn btn-outline"
-                        style="border-radius: var(--radius-full); padding: 12px 30px;">Learn More About Our Services</a>
+                    <a href="services.html" class="btn btn-primary"
+                        style="border-radius: var(--radius-full); padding: 15px 40px;">Learn More About Our Services <i
+                            class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
                 </div>
             </div>
         </section>
@@ -200,43 +242,125 @@
                     <span class="badge">Find Us</span>
                     <h2>Our Branches</h2>
                     <p style="max-width: 700px; margin: 0 auto;">Conveniently located to serve you better across
-                        Murang'a, Kirinyaga, and Embu counties.</p>
+                        Kirinyaga, Murang'a, and Embu counties.</p>
                 </div>
                 <div class="locations-layout">
-                    <div class="locations-grid-2col">
-                        <div class="benefit-card">
-                            <div class="benefit-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <h3>Murang’a Branch</h3>
-                            <p>United Plaza, Murang’a Town. Our flagship centre providing full diagnostic and outpatient
-                                services.</p>
-                            <a href="locations.html#muranga" class="btn btn-outline btn-sm"
-                                style="margin-top: 15px; padding: 10px 20px;">View Map</a>
+                    <div class="accordion">
+                        <!-- Kerugoya Item -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="accordion-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h3>Kerugoya Town <span class="accordion-badge">3 Branches</span></h3>
+                                </div>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>We have expanded to serve you better with three convenient locations in Kerugoya:
+                                    </p>
+                                    <ul style="margin-bottom: 20px;">
+                                        <li><strong>1. Family Bank House:</strong> Located on the Ground Floor, offering
+                                            quick access.</li>
+                                        <li><strong>2. Anchor Plaza:</strong> Situated on the 1st Floor for specialized
+                                            consultations.</li>
+                                        <li><strong>3. Mutige Kiboti Building:</strong> Home to our advanced Laboratory
+                                            &amp; Physiotherapy center.</li>
+                                    </ul>
+                                    <a href="locations.html#kerugoya-1" class="btn btn-outline btn-sm">View Map &amp;
+                                        Details</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <h3>Kerugoya Branch</h3>
-                            <p>Near Family Bank, specializing in advanced high-definition ultrasound diagnostics.</p>
-                            <a href="locations.html#kerugoya" class="btn btn-outline btn-sm"
-                                style="margin-top: 15px; padding: 10px 20px;">View Map</a>
+
+                        <!-- Murang'a Item -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="accordion-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h3>Murang'a Town</h3>
+                                </div>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p><strong>United Plaza Building, 1st Floor (Near Mugoiri Stage)</strong></p>
+                                    <p>Our main hub featuring an ISO 15189:2022 accredited laboratory, ensuring the
+                                        highest standards in diagnostic testing.</p>
+                                    <a href="locations.html#muranga" class="btn btn-outline btn-sm">View Map &amp;
+                                        Details</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <h3>Embu Branch</h3>
-                            <p>Centrally located in Embu Town, offering quick consultations and pharmacy support.</p>
-                            <a href="locations.html#embu" class="btn btn-outline btn-sm"
-                                style="margin-top: 15px; padding: 10px 20px;">View Map</a>
+
+                        <!-- Embu Item -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="accordion-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h3>Embu Town <span class="accordion-badge">2 Branches</span></h3>
+                                </div>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>Serving Embu with two strategic locations:</p>
+                                    <ul style="margin-bottom: 20px;">
+                                        <li><strong>1. Embu Motors Building:</strong> Conveniently located next to
+                                            Family Bank.</li>
+                                        <li><strong>2. ACK Faith House:</strong> Directly opposite the Embu County
+                                            Assembly.</li>
+                                    </ul>
+                                    <a href="locations.html#embu-1" class="btn btn-outline btn-sm">View Map &amp;
+                                        Details</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <h3>Ishiara Branch</h3>
-                            <p>Serving the Ishiara market area with essential outpatient and child health clinics.</p>
-                            <a href="locations.html#ishiara" class="btn btn-outline btn-sm"
-                                style="margin-top: 15px; padding: 10px 20px;">View Map</a>
+
+                        <!-- Mwea Item -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="accordion-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h3>Mwea</h3>
+                                </div>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p><strong>Kawikimu Building, Ground Floor</strong></p>
+                                    <p>Bringing comprehensive outpatient and diagnostic services to the greater Mwea
+                                        area.</p>
+                                    <a href="locations.html#mwea" class="btn btn-outline btn-sm">View Map &amp;
+                                        Details</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ishiara Item -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="accordion-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h3>Ishiara Town</h3>
+                                </div>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p><strong>Youngman Building, Ground Floor</strong></p>
+                                    <p>Providing essential outpatient care and child health clinics to the Ishiara
+                                        market community.</p>
+                                    <a href="locations.html#ishiara" class="btn btn-outline btn-sm">View Map &amp;
+                                        Details</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <div class="locations-photo-box">
-                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800"
-                            alt="Focus Clinical Medical Center">
+                        <img src="assets/images/branches-side.png" alt="Focus Clinical Diagnostic Centre - Our Branches"
+                            style="height: 100%; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
                     </div>
                 </div>
             </div>
@@ -248,7 +372,8 @@
                 <div class="appointment-info centered-content">
                     <span class="badge">Book Appointment</span>
                     <h2>Get Expert Care in 3 Simple Steps</h2>
-                    <p>Reserved your spot at any of our branches in Murang'a, Embu, Ishiara, or Kerugoya.</p>
+                    <p>Reserve your spot at any of our 9 branches across Kerugoya, Murang'a, Embu, Mwea, and Ishiara.
+                    </p>
                     <div class="steps-list">
                         <div class="step-item">
                             <div class="step-number">01</div>
@@ -283,7 +408,78 @@
 
 
 
-        <!-- 7. Testimonials Slider -->
+        <!-- 8. Insurance Partners Section (Enhanced Logo Cloud) -->
+        <section class="logo-cloud-wrapper">
+            <div class="container" style="text-align: center;">
+                <div style="margin-bottom: var(--space-xl);">
+                    <span class="badge">Trusted Healthcare Partners</span>
+                    <h2
+                        style="font-size: 2.5rem; font-weight: 800; color: var(--bg-dark); margin-bottom: 15px; letter-spacing: -1px;">
+                        Accepted Insurance Companies</h2>
+                    <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted); font-size: 1.1rem;">We partner
+                        with major insurance providers across Kenya to ensure you receive quality healthcare with ease
+                        and convenience across all our branches.</p>
+                </div>
+
+                <div class="logo-cloud-container">
+                    <!-- Left Progressive Blur -->
+                    <div class="progressive-blur blur-left"></div>
+
+                    <!-- Infinite Slider (Logos are duplicated for seamless loop) -->
+                    <div class="infinite-slider">
+                        <!-- Insurance Partner Logos -->
+                        <img src="assets/images/logos/aar.png" alt="AAR Healthcare">
+                        <img src="assets/images/logos/apa.png" alt="APA Insurance">
+                        <img src="assets/images/logos/cic.png" alt="CIC Group">
+                        <img src="assets/images/logos/jubilee.png" alt="Jubilee Insurance">
+                        <img src="assets/images/logos/kcb.png" alt="KCB Insurance">
+                        <img src="assets/images/logos/kplc.png" alt="KPLC">
+                        <img src="assets/images/logos/kenyan-alliance.png" alt="Kenyan Alliance">
+                        <img src="assets/images/logos/liaison.png" alt="Liaison Group">
+                        <img src="assets/images/logos/madison.png" alt="Madison Insurance">
+                        <img src="assets/images/logos/minet.png" alt="Minet">
+                        <img src="assets/images/logos/uap.jpeg" alt="UAP Old Mutual">
+                        <img src="assets/images/logos/first-assurance.png" alt="First Assurance">
+                        <img src="assets/images/logos/equity.png" alt="Equity Bank">
+                        <img src="assets/images/logos/kengen.png" alt="KenGen">
+                        <img src="assets/images/logos/ga.png" alt="GA Insurance">
+                        <img src="assets/images/logos/sha.png" alt="SHA">
+                        <img src="assets/images/logos/britam.png" alt="Britam">
+                        <img src="assets/images/logos/coop.jpg" alt="Coop Bank">
+
+                        <!-- Duplicate for Continuous Loop -->
+                        <img src="assets/images/logos/aar.png" alt="AAR Healthcare">
+                        <img src="assets/images/logos/apa.png" alt="APA Insurance">
+                        <img src="assets/images/logos/cic.png" alt="CIC Group">
+                        <img src="assets/images/logos/jubilee.png" alt="Jubilee Insurance">
+                        <img src="assets/images/logos/kcb.png" alt="KCB Insurance">
+                        <img src="assets/images/logos/kplc.png" alt="KPLC">
+                        <img src="assets/images/logos/kenyan-alliance.png" alt="Kenyan Alliance">
+                        <img src="assets/images/logos/liaison.png" alt="Liaison Group">
+                        <img src="assets/images/logos/madison.png" alt="Madison Insurance">
+                        <img src="assets/images/logos/minet.png" alt="Minet">
+                        <img src="assets/images/logos/uap.jpeg" alt="UAP Old Mutual">
+                        <img src="assets/images/logos/first-assurance.png" alt="First Assurance">
+                        <img src="assets/images/logos/equity.png" alt="Equity Bank">
+                        <img src="assets/images/logos/kengen.png" alt="KenGen">
+                        <img src="assets/images/logos/ga.png" alt="GA Insurance">
+                        <img src="assets/images/logos/sha.png" alt="SHA">
+                        <img src="assets/images/logos/britam.png" alt="Britam">
+                        <img src="assets/images/logos/coop.jpg" alt="Coop Bank">
+                    </div>
+
+                    <!-- Right Progressive Blur -->
+                    <div class="progressive-blur blur-right"></div>
+                </div>
+
+                <p
+                    style="margin-top: var(--space-md); color: var(--accent); font-size: 0.95rem; text-align: center; font-weight: 500;">
+                    <i class="fas fa-info-circle"></i> We also accept cash, M-Pesa, and major debit/credit cards.
+                </p>
+            </div>
+        </section>
+
+        <!-- 9. Testimonials Section -->
         <section id="testimonials">
             <div class="container">
                 <div style="text-align: center; margin-bottom: var(--space-xl);">
@@ -343,21 +539,23 @@
                 <div class="footer-col">
                     <h4>Medical Services</h4>
                     <ul>
-                        <li><a href="services.html#diagnostics">Diagnostics</a></li>
-                        <li><a href="services.html#maternal">Maternal Care</a></li>
-                        <li><a href="services.html#family-planning">Family Planning</a></li>
-                        <li><a href="services.html#specialized">Specialized Clinics</a></li>
+                        <li><a href="services.html#general-consultations">General Consultations</a></li>
+                        <li><a href="services.html#specialist-consultations">Specialist Clinics</a></li>
+                        <li><a href="services.html#laboratory">Laboratory & Diagnostics</a></li>
+                        <li><a href="services.html#ultrasound">Ultrasound & Imaging</a></li>
+                        <li><a href="services.html#dental">Dental & Optical</a></li>
                         <li><a href="services.html#pharmacy">Pharmacy</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Get In Touch</h4>
-                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> United
-                        Plaza, Murang’a</p>
-                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +254 7XX XXX XXX
-                    </p>
-                    <p><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i>
-                        info@focusclinical.co.ke</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> 9
+                        Branches across Central Kenya</p>
+                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> <a
+                            href="tel:+254717652857" style="color: inherit; text-decoration: none;">0717 652 857</a></p>
+                    <p><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 10px;"></i> <a
+                            href="https://wa.me/254717652857" style="color: inherit; text-decoration: none;">WhatsApp
+                            Us</a></p>
                     <p style="margin-top: 20px;"><a href="contact.html" class="btn btn-outline btn-sm"
                             style="color: white; border-color: rgba(255,255,255,0.3);">Contact Us</a></p>
                 </div>
@@ -378,7 +576,13 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254717652857" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script src="js/scripts.js"></script>
+    <script src="js/accordion.js"></script>
 </body>
 
 </html>

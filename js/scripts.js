@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 4. Appointment Form Interaction - IN-PAGE SUCCESS MESSAGE
+    // 4. Appointment Form Interaction - IN-PAGE SUCCESS MESSAGE
     const appointmentForm = document.getElementById('appointmentForm') || document.getElementById('detailedResultForm');
     if (appointmentForm) {
         appointmentForm.addEventListener('submit', (e) => {
@@ -132,15 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     phone: document.getElementById('phone')?.value || '',
                     email: document.getElementById('email')?.value || '',
                     dob: document.getElementById('dob')?.value || '',
-                    idNumber: document.getElementById('id_passport')?.value || '',
                     reason: document.getElementById('reason')?.value || '',
                     firstVisit: document.getElementById('first_visit')?.checked || false,
-                    // Insurance Information
-                    insuranceProvider: document.getElementById('insurance_provider')?.value || '',
-                    policyNumber: document.getElementById('policy_number')?.value || '',
-                    // Additional Info
-                    notes: document.getElementById('notes')?.value || '',
-                    smsReminders: document.getElementById('sms_reminders')?.checked || false,
                     // Legacy field (for homepage form if different)
                     branch: document.getElementById('branch')?.value || ''
                 };
@@ -149,8 +143,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveAppointmentToDatabase(appointmentData);
 
                 setTimeout(() => {
-                    showSuccessMessage();
+                    showSuccessMessage('Booking Request Sent!', 'Thank you! Your appointment request has been received. Our team will contact you within 24 hours to confirm.');
                     appointmentForm.reset();
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 1500);
+            }
+        });
+    }
+
+    // 4.1 Contact Form Interaction
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            if (btn) {
+                const originalText = btn.innerText;
+                btn.innerText = 'Sending...';
+                btn.disabled = true;
+
+                // Collect form data
+                const contactData = {
+                    name: document.getElementById('name')?.value || '',
+                    email: document.getElementById('email')?.value || '',
+                    phone: document.getElementById('phone')?.value || '',
+                    subject: document.getElementById('subject')?.value || '',
+                    message: document.getElementById('message')?.value || ''
+                };
+
+                // Save to localStorage database
+                saveContactToDatabase(contactData);
+
+                setTimeout(() => {
+                    showSuccessMessage('Message Sent!', 'Thank you for reaching out. Our team will get back to you shortly.');
+                    contactForm.reset();
                     btn.innerText = originalText;
                     btn.disabled = false;
                 }, 1500);
@@ -160,6 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to save appointment to database (cloud + local fallback)
     async function saveAppointmentToDatabase(data) {
+        // Prepare data with IDs and metadata first so local and cloud match
+        data.id = data.id || Date.now().toString();
+        data.createdAt = data.createdAt || new Date().toISOString();
+        data.status = data.status || 'pending';
+
         // 1. Try Cloud Storage (Vercel KV)
         try {
             const response = await fetch('/api/storage', {
@@ -177,11 +209,36 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Local Fallback (always keep a local copy)
         const storageKey = 'focusAppointments';
         const appointments = JSON.parse(localStorage.getItem(storageKey) || '[]');
-        data.id = data.id || Date.now().toString();
-        data.createdAt = data.createdAt || new Date().toISOString();
-        data.status = data.status || 'pending';
         appointments.push(data);
         localStorage.setItem(storageKey, JSON.stringify(appointments));
+    }
+
+    // Function to save contact to database (cloud + local fallback)
+    async function saveContactToDatabase(data) {
+        // Prepare data with IDs and metadata first so local and cloud match
+        data.id = data.id || Date.now().toString();
+        data.createdAt = data.createdAt || new Date().toISOString();
+        data.status = data.status || 'unread';
+
+        // 1. Try Cloud Storage
+        try {
+            const response = await fetch('/api/storage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'contact', data })
+            });
+            if (response.ok) {
+                console.log('Contact synced to cloud successfully');
+            }
+        } catch (err) {
+            console.warn('Cloud sync failed, saving to local only:', err);
+        }
+
+        // 2. Local Fallback
+        const storageKey = 'focusContacts';
+        const contacts = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        contacts.push(data);
+        localStorage.setItem(storageKey, JSON.stringify(contacts));
     }
 
     // 5. Scroll Animations

@@ -178,6 +178,14 @@ section {
     background-color: var(--primary-light);
 }
 
+.btn-full {
+    width: 100%;
+}
+
+.btn-lg {
+    padding: 18px 32px;
+}
+
 .badge {
     display: inline-block;
     padding: 6px 16px;
@@ -1038,5 +1046,408 @@ section {
 @media (max-width: 992px) {
     .appointment-layout {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Reusable Components */
+.accreditation-card {
+    background: linear-gradient(135deg, rgba(122, 193, 67, 0.05) 0%, rgba(236, 26, 120, 0.05) 100%);
+    border: 2px solid var(--primary);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.accreditation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+}
+
+.accreditation-card i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.accreditation-card h3 {
+    margin-bottom: 10px;
+}
+
+.accreditation-card p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--text-muted);
+}
+
+.partners-card {
+    background: white;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+}
+
+.partners-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.partners-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    max-height: 150px;
+}
+
+/* Service Detail Cards */
+.service-detail-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    transition: var(--transition);
+}
+
+.service-detail-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.service-img-box {
+    height: 100%;
+    min-height: 300px;
+}
+
+.service-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-content-box {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-content-box h3 {
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.75rem;
+}
+
+.service-content-box p {
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+}
+
+.service-features {
+    margin-bottom: var(--space-lg);
+    padding-left: 0;
+    list-style: none;
+}
+
+.service-features li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.service-features li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+
+@media (max-width: 900px) {
+    .service-detail-card {
+        grid-template-columns: 1fr;
+    }
+
+    .service-img-box {
+        height: 250px;
+        min-height: auto;
+    }
+
+    .service-content-box {
+        padding: var(--space-lg);
+    }
+}
+
+/* Mission & Vision */
+.mission-vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+}
+
+.mv-card {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border-top: 5px solid var(--accent);
+    transition: var(--transition);
+}
+
+.mv-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.mv-card i {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+    color: var(--primary);
+}
+
+.mv-card.vision {
+    border-top-color: var(--accent);
+}
+
+.mv-card.vision i {
+    color: var(--accent);
+}
+
+.story-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+}
+
+.story-img {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.story-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 900px) {
+
+    .mission-vision-grid,
+    .story-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    color: white;
+}
+
+/* Contact Page */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+.contact-info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.contact-method-card {
+    background: var(--white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: var(--transition);
+}
+
+.contact-method-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.contact-method-content h4 {
+    margin-bottom: 5px;
+    color: var(--text-main);
+}
+
+.contact-method-content p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+.contact-form-container {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+}
+
+@media (max-width: 992px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Logo Cloud Section --- */
+.logo-cloud-wrapper {
+    position: relative;
+    padding: var(--space-2xl) 0;
+    overflow: hidden;
+    background: var(--bg-soft);
+}
+
+.logo-cloud-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    /* Clips logos strictly to the container */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+/* Infinite Slider */
+.infinite-slider {
+    display: flex;
+    width: max-content;
+    gap: 75px;
+    /* Increased gap */
+    animation: scroll 40s linear infinite;
+    padding: 15px 100px;
+    /* Increased padding to prevent clipping of wide logos */
+}
+
+.infinite-slider:hover {
+    animation-play-state: paused;
+}
+
+.infinite-slider img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    filter: none;
+    opacity: 1;
+    /* Keeping them in full color as requested */
+    transition: var(--transition);
+}
+
+.infinite-slider img:hover {
+    transform: scale(1.1);
+}
+
+/* Progressive Blur Overlays - Enhanced for total masking */
+.progressive-blur {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.blur-left {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-soft) 10%, transparent 100%);
+    backdrop-filter: blur(8px);
+    /* Increased blur for better transition */
+}
+
+.blur-right {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-soft) 10%, transparent 100%);
+    backdrop-filter: blur(8px);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-cloud-title .main {
+        font-size: 1.75rem;
+    }
+
+    .infinite-slider {
+        gap: 40px;
+    }
+
+    .infinite-slider img {
+        height: 35px;
+    }
+
+    .progressive-blur {
+        width: 80px;
     }
 }

@@ -33,8 +33,10 @@
     <div class="top-bar">
         <div class="container">
             <div class="top-info">
-                <span><i class="fas fa-phone"></i> +254 7XX XXX XXX</span>
-                <span><i class="fas fa-envelope"></i> info@focusclinical.co.ke</span>
+                <span><i class="fas fa-phone"></i> <a href="tel:+254717652857"
+                        style="color: inherit; text-decoration: none;">0717 652 857</a></span>
+                <span><i class="fab fa-whatsapp"></i> <a href="https://wa.me/254717652857"
+                        style="color: inherit; text-decoration: none;">WhatsApp Us</a></span>
                 <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
             </div>
             <div class="top-social">
@@ -50,7 +52,8 @@
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo">
+                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo" class="logo-desktop">
+                <img src="assets/images/logo-mark.png" alt="Focus Clinical Logo" class="logo-mobile">
             </a>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
@@ -59,22 +62,31 @@
                 <a href="locations.html">Locations</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="header-actions">
-                <a href="appointment.html" class="btn btn-primary">Make Appointment <i
-                        class="fas fa-arrow-right"></i></a>
-            </div>
+            <button class="mobile-burger" id="mobile-menu-toggle" aria-label="Open mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="appointment.html" class="btn btn-primary">Make Appointment <i class="fas fa-arrow-right"></i></a>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay & Sidebar -->
+    <div id="mobile-menu-overlay" style="display: none;"></div>
+    <div id="mobile-menu-sidebar">
+        <button id="mobile-menu-close" aria-label="Close mobile menu"><i class="fas fa-times"></i></button>
+        <div class="mobile-nav-content"></div>
+    </div>
 
     <main>
         <!-- Page Header / Appointment Process -->
         <section class="bg-soft" style="padding: var(--space-xl) 0;">
             <div class="container">
-                <div class="appointment-info centered-content">
-                    <span class="badge">Book Online</span>
-                    <h1 style="margin-bottom: 20px;">Get Expert Care in 3 Simple Steps</h1>
-                    <p style="max-width: 700px; margin: 0 auto;">Skip the queue. Reserve your spot at any of our
-                        branches in Murang'a, Embu, Ishiara, or Kerugoya by following these steps.</p>
+                <div class="appointment-info centered-content" style="text-align: center;">
+                    <span class="badge" style="background: rgba(236, 26, 120, 0.05);">Book Appointment</span>
+                    <h1
+                        style="margin-bottom: 20px; font-size: 3rem; font-weight: 800; color: var(--bg-dark); letter-spacing: -1px;">
+                        Get Expert Care in 3 Simple Steps</h1>
+                    <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted); font-size: 1.1rem;">Reserve
+                        your spot at any of our 9 branches across Kerugoya, Murang'a, Embu, Mwea, and Ishiara.</p>
 
                     <div class="steps-list" style="margin-top: 40px;">
                         <div class="step-item">
@@ -122,12 +134,37 @@
                             <label for="service">Select Service <span class="required">*</span></label>
                             <select id="service" required>
                                 <option value="">Choose a service...</option>
-                                <option value="Outpatient">Outpatient Consultation</option>
-                                <option value="Specialist">Specialist Clinic</option>
-                                <option value="Maternal">Maternal & Child Health</option>
-                                <option value="Diagnostics">Laboratory / Diagnostics</option>
+                                <option value="General">General Consultation</option>
+                                <option value="Specialist">Specialist Consultation</option>
+                                <option value="CWC">CWC Clinic (Child Welfare)</option>
+                                <option value="Xray">X-Ray</option>
                                 <option value="Ultrasound">Ultrasound</option>
-                                <option value="Pharmacy">Pharmacy Refill</option>
+                                <option value="Echo">Echocardiogram</option>
+                                <option value="ECG">ECG</option>
+                                <option value="Dental">Dental Services</option>
+                                <option value="Optical">Optical Services</option>
+                                <option value="Lab">Laboratory / Diagnostics</option>
+                                <option value="Pharmacy">Pharmacy</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="branch">Preferred Branch <span class="required">*</span></label>
+                            <select id="branch" required>
+                                <option value="">Select a location...</option>
+                                <optgroup label="Kerugoya Town (3 Branches)">
+                                    <option value="kerugoya-1">Kerugoya - Family Bank House, Ground Floor</option>
+                                    <option value="kerugoya-2">Kerugoya - Anchor Plaza, 1st Floor</option>
+                                    <option value="kerugoya-3">Kerugoya - Mutige Kiboti Building (Lab & Physio)</option>
+                                </optgroup>
+                                <option value="muranga">Murang'a - United Plaza Building, 1st Floor, Near Mugoiri Stage
+                                </option>
+                                <optgroup label="Embu Town (2 Branches)">
+                                    <option value="embu-1">Embu - Embu Motors Building, Next to Family Bank</option>
+                                    <option value="embu-2">Embu - ACK Faith House, Opp. County Assembly</option>
+                                </optgroup>
+                                <option value="mwea">Mwea - Kawikimu Building, Ground Floor</option>
+                                <option value="ishiara">Ishiara - Youngman Building, Ground Floor</option>
                             </select>
                         </div>
 
@@ -171,15 +208,9 @@
                             </div>
                         </div>
 
-                        <div class="form-grid" style="margin-bottom: 20px;">
-                            <div class="form-group">
-                                <label for="dob">Date of Birth <span class="required">*</span></label>
-                                <input type="date" id="dob" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="id_passport">ID/Passport Number <span class="required">*</span></label>
-                                <input type="text" id="id_passport" placeholder="Enter ID or Passport number" required>
-                            </div>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="dob">Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dob" required>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 20px;">
@@ -195,35 +226,7 @@
 
                         <hr style="border: 0; border-top: 1px solid var(--border); margin: 30px 0;">
 
-                        <!-- Insurance Information -->
-                        <div class="section-title">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <h3>Insurance Information (Optional)</h3>
-                        </div>
 
-                        <div class="form-group" style="margin-bottom: 20px;">
-                            <label for="insurance_provider">Insurance Provider</label>
-                            <input type="text" id="insurance_provider" placeholder="e.g., NHIF, AAR, Britam">
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 30px;">
-                            <label for="policy_number">Insurance/Policy Number</label>
-                            <input type="text" id="policy_number" placeholder="Enter your policy number">
-                        </div>
-
-                        <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 30px;">
-
-                        <!-- Additional Information -->
-                        <div class="section-title">
-                            <i class="fas fa-clipboard-check"></i>
-                            <h3>Additional Information</h3>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 20px;">
-                            <label for="notes">Additional Notes or Special Requests</label>
-                            <textarea id="notes" rows="3"
-                                placeholder="Any allergies, medications, or special requirements..."></textarea>
-                        </div>
 
                         <div class="checkbox-group">
                             <input type="checkbox" id="consent" name="consent" required>
@@ -231,13 +234,9 @@
                                 healthcare purposes <span class="required">*</span></label>
                         </div>
 
-                        <div class="checkbox-group" style="margin-bottom: 30px;">
-                            <input type="checkbox" id="sms_reminders" name="sms_reminders" checked>
-                            <label for="sms_reminders">Send me SMS reminders about my appointment</label>
-                        </div>
 
-                        <button type="submit" class="btn btn-primary"
-                            style="width: 100%; border-radius: var(--radius-full); padding: 18px;">Confirm
+
+                        <button type="submit" class="btn btn-primary btn-full btn-lg">Confirm
                             Booking</button>
 
                     </form>
@@ -247,8 +246,11 @@
                 <aside class="appointment-sidebar">
                     <div class="sidebar-card">
                         <h4><i class="fas fa-phone-alt"></i> Need Help?</h4>
-                        <p>Call us directly to book your appointment or if you have any questions.</p>
-                        <a href="tel:+254700000000" class="call-btn"><i class="fas fa-phone"></i> +254 7XX XXX XXX</a>
+                        <p>Call or WhatsApp us directly to book your appointment or if you have any questions.</p>
+                        <a href="tel:+254717652857" class="call-btn"><i class="fas fa-phone"></i> 0717 652 857</a>
+                        <a href="https://wa.me/254717652857" class="call-btn"
+                            style="margin-top: 10px; background: #25D366;"><i class="fab fa-whatsapp"></i> WhatsApp
+                            Us</a>
                     </div>
 
                     <div class="sidebar-card">
@@ -282,9 +284,11 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <a href="index.html" class="logo" style="display: block; margin-bottom: 20px;">
-                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo">
+                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo" class="logo-desktop">
+                        <img src="assets/images/logo-mark.png" alt="Focus Clinical Logo" class="logo-mobile">
                     </a>
-                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. Trusted by
+                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. ISO
+                        15189:2022 accredited laboratories. Trusted by
                         families for over a decade.</p>
                 </div>
                 <div class="footer-col">
@@ -300,21 +304,23 @@
                 <div class="footer-col">
                     <h4>Medical Services</h4>
                     <ul>
-                        <li><a href="services.html#diagnostics">Diagnostics</a></li>
-                        <li><a href="services.html#maternal">Maternal Care</a></li>
-                        <li><a href="services.html#family-planning">Family Planning</a></li>
-                        <li><a href="services.html#specialized">Specialized Clinics</a></li>
+                        <li><a href="services.html#general-consultations">General Consultations</a></li>
+                        <li><a href="services.html#specialist-consultations">Specialist Clinics</a></li>
+                        <li><a href="services.html#laboratory">Laboratory & Diagnostics</a></li>
+                        <li><a href="services.html#ultrasound">Ultrasound & Imaging</a></li>
+                        <li><a href="services.html#dental">Dental & Optical</a></li>
                         <li><a href="services.html#pharmacy">Pharmacy</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Get In Touch</h4>
-                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> United
-                        Plaza, Murang’a</p>
-                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +254 7XX XXX XXX
-                    </p>
-                    <p><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i>
-                        info@focusclinical.co.ke</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> 9
+                        Branches across Central Kenya</p>
+                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> <a
+                            href="tel:+254717652857" style="color: inherit; text-decoration: none;">0717 652 857</a></p>
+                    <p><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 10px;"></i> <a
+                            href="https://wa.me/254717652857" style="color: inherit; text-decoration: none;">WhatsApp
+                            Us</a></p>
                     <p style="margin-top: 20px;"><a href="contact.html" class="btn btn-outline btn-sm"
                             style="color: white; border-color: rgba(255,255,255,0.3);">Contact Us</a></p>
                 </div>
@@ -334,6 +340,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254717652857" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"
+        style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 1000; transition: transform 0.3s ease; text-decoration: none;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="js/scripts.js"></script>
 </body>

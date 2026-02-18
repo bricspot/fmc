@@ -2,3 +2,6 @@ node_modules/
 .DS_Store
 .env
 .vercel
+
+# Snyk Security Extension - AI Rules (auto-generated)
+.agent/rules/snyk_rules.md

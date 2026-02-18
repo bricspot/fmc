@@ -25,76 +25,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        .contact-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 1.8fr;
-            gap: var(--space-xl);
-            align-items: start;
-        }
-
-        .contact-info-cards {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-        }
-
-        .contact-method-card {
-            background: var(--white);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            transition: var(--transition);
-        }
-
-        .contact-method-card:hover {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-5px);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-light);
-            color: var(--primary);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
-        .contact-method-content h4 {
-            margin-bottom: 5px;
-            color: var(--text-main);
-        }
-
-        .contact-method-content p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 0;
-        }
-
-        .contact-form-container {
-            background: var(--white);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-        }
-
-        @media (max-width: 992px) {
-            .contact-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -103,8 +33,10 @@
     <div class="top-bar">
         <div class="container">
             <div class="top-info">
-                <span><i class="fas fa-phone"></i> +254 7XX XXX XXX</span>
-                <span><i class="fas fa-envelope"></i> info@focusclinical.co.ke</span>
+                <span><i class="fas fa-phone"></i> <a href="tel:+254717652857"
+                        style="color: inherit; text-decoration: none;">0717 652 857</a></span>
+                <span><i class="fab fa-whatsapp"></i> <a href="https://wa.me/254717652857"
+                        style="color: inherit; text-decoration: none;">WhatsApp Us</a></span>
                 <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
             </div>
             <div class="top-social">
@@ -120,7 +52,8 @@
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo">
+                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo" class="logo-desktop">
+                <img src="assets/images/logo-mark.png" alt="Focus Clinical Logo" class="logo-mobile">
             </a>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
@@ -129,12 +62,19 @@
                 <a href="locations.html">Locations</a>
                 <a href="contact.html" class="active" style="color: var(--primary);">Contact</a>
             </nav>
-            <div class="header-actions">
-                <a href="appointment.html" class="btn btn-primary">Make Appointment <i
-                        class="fas fa-arrow-right"></i></a>
-            </div>
+            <button class="mobile-burger" id="mobile-menu-toggle" aria-label="Open mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="appointment.html" class="btn btn-primary">Make Appointment <i class="fas fa-arrow-right"></i></a>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay & Sidebar -->
+    <div id="mobile-menu-overlay" style="display: none;"></div>
+    <div id="mobile-menu-sidebar">
+        <button id="mobile-menu-close" aria-label="Close mobile menu"><i class="fas fa-times"></i></button>
+        <div class="mobile-nav-content"></div>
+    </div>
 
     <main>
         <!-- Page Header -->
@@ -156,9 +96,11 @@
                     <div class="contact-method-card">
                         <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
                         <div class="contact-method-content">
-                            <h4>Phone Number</h4>
-                            <p>+254 7XX XXX XXX (General)</p>
-                            <p>+254 7XX XXX XXX (Emergencies)</p>
+                            <h4>Phone & WhatsApp</h4>
+                            <p><a href="tel:+254717652857" style="color: inherit; text-decoration: none;">0717 652
+                                    857</a> (General)</p>
+                            <p><a href="https://wa.me/254717652857" style="color: inherit; text-decoration: none;"><i
+                                        class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp Us</a></p>
                         </div>
                     </div>
 
@@ -167,18 +109,11 @@
                         <div class="contact-method-content">
                             <h4>Email Address</h4>
                             <p>info@focusclinical.co.ke</p>
-                            <p>appointments@focusclinical.co.ke</p>
+
                         </div>
                     </div>
 
-                    <div class="contact-method-card">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="contact-method-content">
-                            <h4>Main Office</h4>
-                            <p>United Plaza, Murang’a Town</p>
-                            <p>P.O. Box XXX - XXXXX, Murang'a</p>
-                        </div>
-                    </div>
+
 
                     <div class="contact-method-card">
                         <div class="contact-icon"><i class="fas fa-clock"></i></div>
@@ -231,41 +166,14 @@
                             <textarea id="message" rows="5" placeholder="How can we help you?" required></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary"
-                            style="width: 100%; border-radius: var(--radius-full); padding: 18px;">Send Message</button>
+                        <button type="submit" class="btn btn-primary btn-full btn-lg">Send
+                            Message</button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- Google Maps Integration (Conceptual) -->
-        <section class="container" style="margin-top: var(--space-xl);">
-            <div style="text-align: center; margin-bottom: var(--space-lg);">
-                <h2>Visit Our Branches</h2>
-            </div>
-            <div class="locations-page-grid">
-                <div class="location-full-card">
-                    <h3>Murang'a</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 15px;">United Plaza, Uhuru Highway</p>
-                    <a href="locations.html#muranga" class="btn btn-outline" style="width: 100%;">View on Map</a>
-                </div>
-                <div class="location-full-card">
-                    <h3>Kerugoya</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 15px;">Near Family Bank, Main Street</p>
-                    <a href="locations.html#kerugoya" class="btn btn-outline" style="width: 100%;">View on Map</a>
-                </div>
-                <div class="location-full-card">
-                    <h3>Embu</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 15px;">Town Centre, Main Street</p>
-                    <a href="locations.html#embu" class="btn btn-outline" style="width: 100%;">View on Map</a>
-                </div>
-                <div class="location-full-card">
-                    <h3>Ishiara</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 15px;">Market Road, Near Bus Stage</p>
-                    <a href="locations.html#ishiara" class="btn btn-outline" style="width: 100%;">View on Map</a>
-                </div>
-            </div>
-        </section>
+
     </main>
 
     <!-- Footer -->
@@ -274,9 +182,11 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <a href="index.html" class="logo" style="display: block; margin-bottom: 20px;">
-                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo">
+                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo" class="logo-desktop">
+                        <img src="assets/images/logo-mark.png" alt="Focus Clinical Logo" class="logo-mobile">
                     </a>
-                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. Trusted by
+                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. ISO
+                        15189:2022 accredited laboratories. Trusted by
                         families for over a decade.</p>
                 </div>
                 <div class="footer-col">
@@ -292,19 +202,21 @@
                 <div class="footer-col">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><a href="services.html#diagnostics">Diagnostics</a></li>
-                        <li><a href="services.html#maternal">Maternal Care</a></li>
-                        <li><a href="services.html#family-planning">Family Planning</a></li>
+                        <li><a href="services.html#general-consultations">General Consultations</a></li>
+                        <li><a href="services.html#specialist-consultations">Specialist Clinics</a></li>
+                        <li><a href="services.html#laboratory">Laboratory & Diagnostics</a></li>
+                        <li><a href="services.html#ultrasound">Ultrasound & Imaging</a></li>
+                        <li><a href="services.html#dental">Dental & Optical</a></li>
                         <li><a href="services.html#pharmacy">Pharmacy</a></li>
-                        <li><a href="services.html#specialized">Specialized Clinics</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Our Locations</h4>
                     <ul>
-                        <li><a href="locations.html#muranga">Murang'a</a></li>
                         <li><a href="locations.html#kerugoya">Kerugoya</a></li>
+                        <li><a href="locations.html#muranga">Murang'a</a></li>
                         <li><a href="locations.html#embu">Embu</a></li>
+                        <li><a href="locations.html#mwea">Mwea</a></li>
                         <li><a href="locations.html#ishiara">Ishiara</a></li>
                     </ul>
                 </div>
@@ -325,72 +237,12 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254717652857" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script src="js/scripts.js"></script>
-    <script>
-        // Function to save contact to database (cloud + local fallback)
-        async function saveContactToDatabase(data) {
-            // 1. Try Cloud Storage
-            try {
-                const response = await fetch('/api/storage', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'contact', data })
-                });
-                if (response.ok) {
-                    console.log('Contact synced to cloud successfully');
-                }
-            } catch (err) {
-                console.warn('Cloud sync failed, saving to local only:', err);
-            }
-
-            // 2. Local Fallback
-            const storageKey = 'focusContacts';
-            const contacts = JSON.parse(localStorage.getItem(storageKey) || '[]');
-            data.id = data.id || Date.now().toString();
-            data.createdAt = data.createdAt || new Date().toISOString();
-            data.status = data.status || 'unread';
-            contacts.push(data);
-            localStorage.setItem(storageKey, JSON.stringify(contacts));
-        }
-
-        // Specific form handler for contact page
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = e.target.querySelector('button[type="submit"]');
-                const originalText = btn.innerText;
-
-                btn.innerText = 'Sending...';
-                btn.disabled = true;
-
-                // Collect form data
-                const contactData = {
-                    name: document.getElementById('name')?.value || '',
-                    email: document.getElementById('email')?.value || '',
-                    phone: document.getElementById('phone')?.value || '',
-                    subject: document.getElementById('subject')?.value || '',
-                    message: document.getElementById('message')?.value || ''
-                };
-
-                // Save to localStorage database
-                saveContactToDatabase(contactData);
-
-                setTimeout(() => {
-                    // Reuse the success message function from scripts.js if available
-                    if (typeof showSuccessMessage === 'function') {
-                        showSuccessMessage('Message Sent!', 'Thank you for reaching out. Our team will get back to you shortly.');
-                        contactForm.reset();
-                    } else {
-                        alert('Message Sent! Thank you for reaching out.');
-                        contactForm.reset();
-                    }
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }, 1500);
-            });
-        }
-    </script>
 </body>
 
 </html>
