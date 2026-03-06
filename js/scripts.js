@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 console.error('Submit error:', err);
                 if (typeof showToast === 'function') {
-                    showToast('Network error. Please check your connection and try again.', 'error');
+                    showToast(err.message || 'Network error. Please check your connection and try again.', 'error');
                 }
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (err) {
                 console.error('Submit error:', err);
-                showToast('Network error. Please check your connection and try again.', 'error');
+                showToast(err.message || 'Network error. Please check your connection and try again.', 'error');
             } finally {
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     showToast(result.error || 'Could not subscribe. Please try again.', 'error');
                 }
             } catch (err) {
-                showToast('Network error. Please try again.', 'error');
+                showToast(err.message || 'Network error. Please try again.', 'error');
             } finally {
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
