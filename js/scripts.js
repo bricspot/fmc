@@ -148,7 +148,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(formData)
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (parseError) {
+                    throw new Error('Server returned an invalid response. This usually happens if the backend is not running properly or is missing environment variables.');
+                }
+
+                if (!response.ok && !result) {
+                    throw new Error(`Server returned status ${response.status}`);
+                }
 
                 if (result.success) {
                     const refId = result.id.substring(0, 8).toUpperCase();
@@ -246,7 +255,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(formData)
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (parseError) {
+                    throw new Error('Server returned an invalid response. This usually happens if the backend is not running properly or is missing environment variables.');
+                }
+
+                if (!response.ok && !result) {
+                    throw new Error(`Server returned status ${response.status}`);
+                }
 
                 if (result.success) {
                     showToast('Message sent! We\'ll get back to you soon.', 'success');
@@ -287,7 +305,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({ email: emailInput.value })
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (parseError) {
+                    throw new Error('Server returned an invalid response. This usually happens if the backend is not running properly or is missing environment variables.');
+                }
+
+                if (!response.ok && !result) {
+                    throw new Error(`Server returned status ${response.status}`);
+                }
 
                 if (result.success) {
                     showToast(result.message, 'success');
