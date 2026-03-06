@@ -255,7 +255,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    localStorage.setItem('adminSession', JSON.stringify(result.session));
+                                                localStorage.setItem('focusAdminSession', JSON.stringify(result.session));
                     localStorage.setItem('adminLoggedIn', 'true');
                     window.location.href = '/admin/dashboard';
                 } else {
