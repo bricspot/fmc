@@ -25,6 +25,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Flatpickr Date Picker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -40,10 +43,14 @@
                 <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
             </div>
             <div class="top-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="Twitter/X"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>
@@ -58,7 +65,7 @@
             <nav class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
-                <a href="index.html#services">Services</a>
+                <a href="services.html">Services</a>
                 <a href="locations.html">Locations</a>
                 <a href="contact.html">Contact</a>
             </nav>
@@ -153,15 +160,15 @@
                             <select id="branch" required>
                                 <option value="">Select a location...</option>
                                 <optgroup label="Kerugoya Town (3 Branches)">
-                                    <option value="kerugoya-1">Kerugoya - Family Bank House, Ground Floor</option>
+                                    <option value="kerugoya-1">Kerugoya - Family Bank House, Ground Floor (Next to
+                                        Family Bank)</option>
                                     <option value="kerugoya-2">Kerugoya - Anchor Plaza, 1st Floor</option>
                                     <option value="kerugoya-3">Kerugoya - Mutige Kiboti Building (Lab & Physio)</option>
                                 </optgroup>
                                 <option value="muranga">Murang'a - United Plaza Building, 1st Floor, Near Mugoiri Stage
                                 </option>
-                                <optgroup label="Embu Town (2 Branches)">
+                                <optgroup label="Embu Town">
                                     <option value="embu-1">Embu - Embu Motors Building, Next to Family Bank</option>
-                                    <option value="embu-2">Embu - ACK Faith House, Opp. County Assembly</option>
                                 </optgroup>
                                 <option value="mwea">Mwea - Kawikimu Building, Ground Floor</option>
                                 <option value="ishiara">Ishiara - Youngman Building, Ground Floor</option>
@@ -171,7 +178,7 @@
                         <div class="form-grid" style="margin-bottom: 30px;">
                             <div class="form-group">
                                 <label for="date">Preferred Date <span class="required">*</span></label>
-                                <input type="date" id="date" required>
+                                <input type="text" id="date" placeholder="Select a date" required>
                             </div>
                             <div class="form-group">
                                 <label for="time">Preferred Time <span class="required">*</span></label>
@@ -210,7 +217,7 @@
 
                         <div class="form-group" style="margin-bottom: 20px;">
                             <label for="dob">Date of Birth <span class="required">*</span></label>
-                            <input type="date" id="dob" required>
+                            <input type="text" id="dob" placeholder="Select your date of birth" required>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 20px;">
@@ -404,9 +411,6 @@
                 <div class="footer-bottom-right">
                     <a href="privacy-policy.html">Privacy Policy</a>
                     <a href="terms-of-service.html">Terms of Service</a>
-                    <a href="admin/login.html" class="staff-link">
-                        <i class="fas fa-lock"></i> Staff Portal
-                    </a>
                 </div>
             </div>
         </div>
@@ -418,7 +422,26 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <script src="js/toast.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Initialize Flatpickr on date fields
+        flatpickr('#date', {
+            minDate: 'today',
+            dateFormat: 'Y-m-d',
+            altInput: true,
+            altFormat: 'F j, Y',
+            disableMobile: true
+        });
+        flatpickr('#dob', {
+            maxDate: 'today',
+            dateFormat: 'Y-m-d',
+            altInput: true,
+            altFormat: 'F j, Y',
+            disableMobile: true
+        });
+    </script>
 </body>
 
 </html>

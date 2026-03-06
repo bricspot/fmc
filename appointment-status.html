@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Appointment | Focus Clinical and Diagnostics Centre</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Check the status of your appointment at Focus Clinical. Enter your phone number and reference number to track your booking.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .status-section {
+            padding: var(--space-2xl) 0;
+        }
+
+        .status-card-wrapper {
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .status-form-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-xl);
+        }
+
+        .status-form-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .status-form-card .form-subtitle {
+            color: var(--text-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .status-form-card .form-group {
+            margin-bottom: 20px;
+        }
+
+        .status-form-card label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .status-form-card input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+        }
+
+        .status-form-card input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(122, 193, 67, 0.15);
+        }
+
+        .status-result {
+            display: none;
+            margin-top: var(--space-lg);
+            border-top: 1px solid var(--border);
+            padding-top: var(--space-lg);
+        }
+
+        .status-result.active {
+            display: block;
+        }
+
+        .result-card {
+            background: var(--bg-soft);
+            border-radius: var(--radius-md);
+            padding: 24px;
+        }
+
+        .result-card .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .result-card .result-header h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .detail-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-rows .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .detail-rows .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-rows .detail-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .detail-rows .detail-value {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .status-confirmed {
+            background: #d1fae5;
+            color: #047857;
+        }
+
+        .status-completed {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status-cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .not-found-card {
+            text-align: center;
+            padding: 30px;
+            background: #fef2f2;
+            border-radius: var(--radius-md);
+            color: #7f1d1d;
+        }
+
+        .not-found-card i {
+            font-size: 2rem;
+            color: #dc2626;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. Top Info Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-phone"></i> <a href="tel:+254717652857"
+                        style="color: inherit; text-decoration: none;">0717 652 857</a></span>
+                <span><i class="fab fa-whatsapp"></i> <a href="https://wa.me/254717652857"
+                        style="color: inherit; text-decoration: none;">WhatsApp Us</a></span>
+                <span><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </div>
+            <div class="top-social">
+                <a href="https://www.facebook.com/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="Twitter/X"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/focusclinical" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-full.png" alt="Focus Clinical Logo" class="logo-desktop">
+                <img src="assets/images/logo-mark.png" alt="Focus Clinical Logo" class="logo-mobile">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="locations.html">Locations</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button class="mobile-burger" id="mobile-menu-toggle" aria-label="Open mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="appointment.html" class="btn btn-primary">Make Appointment <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-overlay" style="display: none;"></div>
+    <div id="mobile-menu-sidebar">
+        <button id="mobile-menu-close" aria-label="Close mobile menu"><i class="fas fa-times"></i></button>
+        <div class="mobile-nav-content"></div>
+    </div>
+
+    <main>
+        <!-- Page Header -->
+        <section class="bg-soft" style="padding: var(--space-xl) 0;">
+            <div class="container" style="text-align: center;">
+                <span class="badge">Track Your Booking</span>
+                <h1
+                    style="margin-bottom: 15px; font-size: 2.5rem; font-weight: 800; color: var(--bg-dark); letter-spacing: -1px;">
+                    Appointment Status</h1>
+                <p style="max-width: 600px; margin: 0 auto; color: var(--text-muted); font-size: 1.1rem;">
+                    Enter your phone number and reference number to check the status of your appointment.</p>
+            </div>
+        </section>
+
+        <!-- Status Form -->
+        <section class="status-section">
+            <div class="container">
+                <div class="status-card-wrapper">
+                    <div class="status-form-card">
+                        <h2><i class="fas fa-search" style="color: var(--primary); margin-right: 8px;"></i> Look Up
+                            Appointment</h2>
+                        <p class="form-subtitle">We'll find your appointment using the phone number you registered with
+                            and your booking reference.</p>
+
+                        <form id="statusForm">
+                            <div class="form-group">
+                                <label for="phone"><i class="fas fa-phone"
+                                        style="margin-right: 6px; color: var(--primary);"></i> Phone Number</label>
+                                <input type="tel" id="phone" placeholder="+254 7XX XXX XXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reference"><i class="fas fa-hashtag"
+                                        style="margin-right: 6px; color: var(--primary);"></i> Reference Number</label>
+                                <input type="text" id="reference" placeholder="e.g. A1B2C3D4" required
+                                    style="text-transform: uppercase;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full btn-lg" id="statusBtn">
+                                <i class="fas fa-search"></i> Check Status
+                            </button>
+                        </form>
+
+                        <!-- Result Area -->
+                        <div class="status-result" id="statusResult">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            <i class="fas fa-info-circle" style="color: var(--primary);"></i>
+                            Can't find your booking? Call us at <a href="tel:+254717652857"
+                                style="color: var(--primary); font-weight: 600;">0717 652 857</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="display: block; margin-bottom: 20px;">
+                        <img src="assets/images/logo-footer.png" alt="Focus Clinical Logo" class="logo-desktop">
+                        <img src="assets/images/logo-mark.png" alt="Focus Clinical Logo" class="logo-mobile">
+                    </a>
+                    <p>Providing integrated healthcare and modern diagnostic services across Central Kenya. Trusted by
+                        families for over a decade.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="locations.html">Our Branches</a></li>
+                        <li><a href="appointment.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Medical Services</h4>
+                    <ul>
+                        <li><a href="services.html#general-consultations">General Consultations</a></li>
+                        <li><a href="services.html#specialist-consultations">Specialist Clinics</a></li>
+                        <li><a href="services.html#laboratory">Laboratory & Diagnostics</a></li>
+                        <li><a href="services.html#ultrasound">Ultrasound & Imaging</a></li>
+                        <li><a href="services.html#dental">Dental & Optical</a></li>
+                        <li><a href="services.html#pharmacy">Pharmacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get In Touch</h4>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> 8
+                        Branches across Central Kenya</p>
+                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> <a
+                            href="tel:+254717652857" style="color: inherit; text-decoration: none;">0717 652 857</a></p>
+                    <p><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 10px;"></i> <a
+                            href="https://wa.me/254717652857" style="color: inherit; text-decoration: none;">WhatsApp
+                            Us</a></p>
+                    <p style="margin-top: 20px;"><a href="contact.html" class="btn btn-outline btn-sm"
+                            style="color: white; border-color: rgba(255,255,255,0.3);">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Focus Clinical and Diagnostics Centre Ltd. All Rights Reserved. | Designed by
+                        GMCreative | Powering digital healthcare.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-of-service.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254717652857" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/toast.js"></script>
+    <script src="js/scripts.js"></script>
+    <script>
+        document.getElementById('statusForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('statusBtn');
+            const resultArea = document.getElementById('statusResult');
+
+            const phone = document.getElementById('phone').value.trim();
+            const reference = document.getElementById('reference').value.trim();
+
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="btn-spinner" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.42" stroke-dashoffset="10"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg> Looking up...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            try {
+                const response = await fetch('/api/check-appointment-status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, reference })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const apt = result.appointment;
+                    const statusClass = apt.status === 'confirmed' ? 'status-confirmed' :
+                        apt.status === 'completed' ? 'status-completed' :
+                            apt.status === 'cancelled' ? 'status-cancelled' : 'status-pending';
+
+                    const statusIcon = apt.status === 'confirmed' ? 'fa-check-circle' :
+                        apt.status === 'completed' ? 'fa-clipboard-check' :
+                            apt.status === 'cancelled' ? 'fa-times-circle' : 'fa-clock';
+
+                    resultArea.innerHTML = `
+                        <div class="result-card">
+                            <div class="result-header">
+                                <h3><i class="fas fa-calendar-check" style="color: var(--primary); margin-right: 8px;"></i> Appointment Found</h3>
+                                <span class="status-badge ${statusClass}">
+                                    <i class="fas ${statusIcon}"></i> ${apt.status}
+                                </span>
+                            </div>
+                            <div class="detail-rows">
+                                <div class="detail-row">
+                                    <span class="detail-label">Reference</span>
+                                    <span class="detail-value" style="font-family: monospace; letter-spacing: 1px;">${apt.reference}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Patient</span>
+                                    <span class="detail-value">${apt.patient_name}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Service</span>
+                                    <span class="detail-value">${apt.service}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Branch</span>
+                                    <span class="detail-value">${apt.branch}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Date</span>
+                                    <span class="detail-value">${apt.date}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Time Slot</span>
+                                    <span class="detail-value">${apt.time}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    resultArea.classList.add('active');
+                } else {
+                    resultArea.innerHTML = `
+                        <div class="not-found-card">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h3 style="margin-bottom: 8px;">No Appointment Found</h3>
+                            <p>${result.error || 'Please check your phone number and reference and try again.'}</p>
+                        </div>
+                    `;
+                    resultArea.classList.add('active');
+                }
+            } catch (err) {
+                showToast('Network error. Please check your connection.', 'error');
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+
+</html>

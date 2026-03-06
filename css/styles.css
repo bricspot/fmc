@@ -1451,3 +1451,108 @@ section {
         width: 80px;
     }
 }
+
+/* Booking Success Card Styles */
+.booking-success-card {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.success-icon-wrap {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+}
+
+.booking-success-card h2 {
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.success-subtitle {
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.success-details {
+    background: var(--bg-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    text-align: left;
+    margin-bottom: var(--space-lg);
+}
+
+.success-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.success-detail-row:last-child {
+    border-bottom: none;
+}
+
+.ref-row {
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 2px dashed var(--border);
+}
+
+.success-detail-row .detail-label {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.success-detail-row .detail-label i {
+    width: 20px;
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+.success-detail-row .detail-value {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.ref-number {
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--accent) !important;
+    letter-spacing: 2px;
+}
+
+.success-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.success-note i {
+    color: var(--primary);
+    margin-right: 6px;
+}
+
+.success-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .success-actions {
+        flex-direction: column;
+    }
+}

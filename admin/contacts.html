@@ -118,10 +118,17 @@
                             <!-- Populated by JS -->
                         </tbody>
                     </table>
-                    <p class="empty-state" id="noContacts" style="display: none;">
-                        <i class="fas fa-inbox"></i><br>
-                        No contact messages found
-                    </p>
+                    <div class="empty-state-box" id="noContacts"
+                        style="display: none; text-align: center; padding: 60px 20px;">
+                        <div
+                            style="width: 80px; height: 80px; border-radius: 50%; background: #f0fdf4; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <i class="fas fa-inbox" style="font-size: 2rem; color: var(--primary);"></i>
+                        </div>
+                        <h3 style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 8px;">No Messages Found
+                        </h3>
+                        <p style="color: var(--text-muted); max-width: 400px; margin: 0 auto;">When patients send
+                            messages via the contact form, they will appear here.</p>
+                    </div>
                 </div>
             </div>
         </div>

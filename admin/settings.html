@@ -149,11 +149,11 @@
                             <i class="fas fa-download"></i> Export All Data
                         </button>
                         <button class="btn btn-outline" style="border-color: #ef4444; color: #ef4444;"
-                            onclick="clearAppointments()">
+                            onclick="showDeleteModal('appointments')">
                             <i class="fas fa-trash"></i> Clear Appointments
                         </button>
                         <button class="btn btn-outline" style="border-color: #ef4444; color: #ef4444;"
-                            onclick="clearContacts()">
+                            onclick="showDeleteModal('contacts')">
                             <i class="fas fa-trash"></i> Clear Messages
                         </button>
                     </div>
@@ -161,6 +161,38 @@
             </div>
         </div>
     </main>
+
+    <!-- Destructive Action Confirmation Modal -->
+    <div class="modal-overlay" id="deleteConfirmModal"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+        <div class="modal"
+            style="background:#fff; border-radius:16px; padding:30px; max-width:440px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            <div style="text-align:center; margin-bottom:20px;">
+                <div
+                    style="width:60px;height:60px;border-radius:50%;background:#fef2f2;display:inline-flex;align-items:center;justify-content:center;margin-bottom:15px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size:1.5rem;color:#dc2626;"></i>
+                </div>
+                <h3 style="color:#1a1a2e;margin-bottom:8px;" id="deleteModalTitle">Confirm Deletion</h3>
+                <p style="color:#64748b;font-size:0.95rem;" id="deleteModalDesc">This action cannot be undone.</p>
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="display:block;font-weight:600;margin-bottom:8px;color:#374151;">Type <span
+                        style="color:#dc2626;font-family:monospace;background:#fef2f2;padding:2px 8px;border-radius:4px;">DELETE</span>
+                    to confirm:</label>
+                <input type="text" id="deleteConfirmInput"
+                    style="width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:8px;font-size:1rem;transition:border-color 0.2s;"
+                    placeholder="Type DELETE here" autocomplete="off">
+            </div>
+            <div style="display:flex;gap:10px;">
+                <button class="btn btn-outline" style="flex:1;" onclick="closeDeleteModal()">Cancel</button>
+                <button class="btn" id="deleteConfirmBtn"
+                    style="flex:1;background:#dc2626;color:#fff;border:none;opacity:0.5;cursor:not-allowed;" disabled
+                    onclick="executeDelete()">
+                    <i class="fas fa-trash"></i> Delete Forever
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="admin.js"></script>
     <script>
@@ -217,25 +249,60 @@
             link.click();
         }
 
-        function clearAppointments() {
-            if (confirm('Are you sure you want to delete ALL appointments? This cannot be undone.')) {
-                if (confirm('Final confirmation: Delete all appointment records?')) {
-                    localStorage.removeItem(CONFIG.dataKeys.appointments);
-                    alert('All appointments have been cleared.');
-                }
-            }
+        // Custom destructive confirmation modal
+        let deleteTarget = null;
+
+        function showDeleteModal(target) {
+            deleteTarget = target;
+            const modal = document.getElementById('deleteConfirmModal');
+            const input = document.getElementById('deleteConfirmInput');
+            const btn = document.getElementById('deleteConfirmBtn');
+            const title = document.getElementById('deleteModalTitle');
+            const desc = document.getElementById('deleteModalDesc');
+
+            title.textContent = target === 'appointments' ? 'Clear All Appointments?' : 'Clear All Messages?';
+            desc.textContent = `This will permanently delete all ${target === 'appointments' ? 'appointment records' : 'contact messages'}. This action cannot be undone.`;
+
+            input.value = '';
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+            modal.style.display = 'flex';
         }
 
-        function clearContacts() {
-            if (confirm('Are you sure you want to delete ALL contact messages? This cannot be undone.')) {
-                if (confirm('Final confirmation: Delete all contact messages?')) {
-                    localStorage.removeItem(CONFIG.dataKeys.contacts);
-                    alert('All contact messages have been cleared.');
-                }
-            }
+        function closeDeleteModal() {
+            document.getElementById('deleteConfirmModal').style.display = 'none';
+            deleteTarget = null;
         }
 
+        document.getElementById('deleteConfirmInput').addEventListener('input', function () {
+            const btn = document.getElementById('deleteConfirmBtn');
+            if (this.value.trim() === 'DELETE') {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            } else {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            }
+        });
 
+        function executeDelete() {
+            if (deleteTarget === 'appointments') {
+                localStorage.removeItem(CONFIG.dataKeys.appointments);
+                showSuccess('All appointments have been cleared.');
+            } else if (deleteTarget === 'contacts') {
+                localStorage.removeItem(CONFIG.dataKeys.contacts);
+                showSuccess('All contact messages have been cleared.');
+            }
+            closeDeleteModal();
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('deleteConfirmModal').addEventListener('click', function (e) {
+            if (e.target === this) closeDeleteModal();
+        });
     </script>
 </body>
 

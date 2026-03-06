@@ -1,22 +1,24 @@
 /* 
    Focus Clinical and Diagnostics Centre - Interactivity
-   Enhanced with Micare-inspired UX features
+   Enhanced with Supabase backend and modern UX
 */
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Sticky Header with Scroll Class
     const header = document.querySelector('.main-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.style.padding = '10px 0';
-            header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-        } else {
-            header.style.padding = '15px 0';
-            header.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.05)';
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.05)';
+            }
+        });
+    }
 
-    // 2. Mobile Menu (Static HTML + CSS Classes) - Improved Performance
+    // 2. Mobile Menu
     const initMobileMenu = () => {
         const burger = document.getElementById('mobile-menu-toggle');
         const overlay = document.getElementById('mobile-menu-overlay');
@@ -27,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!burger || !menu || !overlay) return;
 
-        // Clone links if empty
         if (navLinks && mobileNavContent && mobileNavContent.children.length === 0) {
             const links = navLinks.querySelectorAll('a');
             links.forEach(link => {
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function openMenu() {
             menu.classList.add('active');
             overlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
 
         function closeMenu() {
@@ -50,37 +51,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         burger.addEventListener('click', openMenu);
-        closeBtn.addEventListener('click', closeMenu);
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
 
-        // Handle Resize
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 900) {
-                closeMenu();
-            }
+            if (window.innerWidth > 900) closeMenu();
         });
     };
 
     initMobileMenu();
 
-    // 3. Simple Testimonial Slider - Using reliable small images
+    // 3. Testimonial Slider (for index.html)
     const testimonials = [
         {
-            text: "The staff at Focus Clinical are incredibly professional. I got my lab results the same day and the consultation was thorough. Highly recommended for families.",
+            text: "I've been managing my diabetes at Focus Clinical for two years. The nutrition counselling and regular check-ups have significantly improved my quality of life.",
             author: "John Maina",
             role: "Kerugoya Patient",
             img: "assets/images/testimonial-1.png"
         },
         {
-            text: "Excellent experience for my kids' immunization. The Ishiara branch is clean, well-organized, and the nurses are very gentle. Best care in the region!",
-            author: "Sarah Wanjiku",
-            role: "Ishiara Parent",
+            text: "The ISO-accredited lab at Murang'a branch gave me accurate and fast results. Professional staff who truly care.",
+            author: "Peter Kamau",
+            role: "Murang'a Patient",
             img: "assets/images/testimonial-2.png"
         },
         {
-            text: "I've been managing my diabetes at Focus Clinical for two years now. The nutrition counselling and regular checkups have significantly improved my health.",
-            author: "Peter Kamau",
-            role: "Murang'a Patient",
+            text: "Brought my newborn for CWC clinics here. The nurses are incredibly gentle and the immunisation schedule reminders are very helpful.",
+            author: "Mary Wanjiku",
+            role: "Embu Patient",
             img: "assets/images/testimonial-3.png"
         }
     ];
@@ -95,10 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         testCard.style.transform = 'translateY(10px)';
 
         setTimeout(() => {
-            testCard.querySelector('p').innerText = `"${t.text}"`;
-            testCard.querySelector('h4').innerText = t.author;
-            testCard.querySelector('span').innerText = t.role;
-            testCard.querySelector('img').src = t.img;
+            const pEl = testCard.querySelector('.testimonial-text');
+            const nameEl = testCard.querySelector('.testimonial-name');
+            const roleEl = testCard.querySelector('.testimonial-role');
+            const imgEl = testCard.querySelector('.testimonial-avatar');
+            if (pEl) pEl.innerText = `"${t.text}"`;
+            if (nameEl) nameEl.innerText = t.author;
+            if (roleEl) roleEl.innerText = t.role;
+            if (imgEl) imgEl.src = t.img;
             testCard.style.opacity = '1';
             testCard.style.transform = 'translateY(0)';
         }, 400);
@@ -110,138 +112,201 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateTestimonial, 5000);
     }
 
-    // 4. Appointment Form Interaction - IN-PAGE SUCCESS MESSAGE
-    // 4. Appointment Form Interaction - IN-PAGE SUCCESS MESSAGE
+    // ===========================================
+    // 4. Appointment Form Handler (Supabase API)
+    // ===========================================
     const appointmentForm = document.getElementById('appointmentForm') || document.getElementById('detailedResultForm');
     if (appointmentForm) {
-        appointmentForm.addEventListener('submit', (e) => {
+        appointmentForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('button[type="submit"]');
-            if (btn) {
-                const originalText = btn.innerText;
-                btn.innerText = 'Processing...';
-                btn.disabled = true;
+            if (!btn) return;
 
-                // Collect form data
-                const appointmentData = {
-                    // Service Selection
-                    service: document.getElementById('service')?.value || '',
-                    date: document.getElementById('date')?.value || '',
-                    time: document.getElementById('time')?.value || '',
-                    // Patient Information
-                    fullname: document.getElementById('fullname')?.value || '',
-                    phone: document.getElementById('phone')?.value || '',
-                    email: document.getElementById('email')?.value || '',
-                    dob: document.getElementById('dob')?.value || '',
-                    reason: document.getElementById('reason')?.value || '',
-                    firstVisit: document.getElementById('first_visit')?.checked || false,
-                    // Legacy field (for homepage form if different)
-                    branch: document.getElementById('branch')?.value || ''
-                };
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="btn-spinner" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.42" stroke-dashoffset="10"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg> Please wait...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
 
-                // Save to localStorage database
-                saveAppointmentToDatabase(appointmentData);
+            const formData = {
+                service: document.getElementById('service')?.value || '',
+                branch: document.getElementById('branch')?.value || '',
+                date: document.getElementById('date')?.value || '',
+                time: document.getElementById('time')?.value || '',
+                fullname: document.getElementById('fullname')?.value || '',
+                phone: document.getElementById('phone')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                dob: document.getElementById('dob')?.value || '',
+                reason: document.getElementById('reason')?.value || '',
+                first_visit: document.getElementById('first_visit')?.checked || false,
+                consent: document.getElementById('consent')?.checked || false
+            };
 
-                setTimeout(() => {
-                    showSuccessMessage('Booking Request Sent!', 'Thank you! Your appointment request has been received. Our team will contact you within 24 hours to confirm.');
-                    appointmentForm.reset();
-                    btn.innerText = originalText;
+            try {
+                const response = await fetch('/api/submit-appointment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const refId = result.id.substring(0, 8).toUpperCase();
+                    const formContainer = document.querySelector('.appointment-form-container');
+                    if (formContainer) {
+                        formContainer.innerHTML = `
+                            <div class="booking-success-card">
+                                <div class="success-icon-wrap">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h2>Booking Confirmed!</h2>
+                                <p class="success-subtitle">Your appointment request has been received successfully.</p>
+                                <div class="success-details">
+                                    <div class="success-detail-row">
+                                        <span class="detail-label"><i class="fas fa-user"></i> Patient</span>
+                                        <span class="detail-value">${formData.fullname}</span>
+                                    </div>
+                                    <div class="success-detail-row">
+                                        <span class="detail-label"><i class="fas fa-briefcase-medical"></i> Service</span>
+                                        <span class="detail-value">${formData.service}</span>
+                                    </div>
+                                    <div class="success-detail-row">
+                                        <span class="detail-label"><i class="fas fa-map-marker-alt"></i> Branch</span>
+                                        <span class="detail-value">${formData.branch}</span>
+                                    </div>
+                                    <div class="success-detail-row">
+                                        <span class="detail-label"><i class="fas fa-calendar"></i> Date</span>
+                                        <span class="detail-value">${formData.date}</span>
+                                    </div>
+                                    <div class="success-detail-row">
+                                        <span class="detail-label"><i class="fas fa-clock"></i> Time</span>
+                                        <span class="detail-value">${formData.time}</span>
+                                    </div>
+                                    <div class="success-detail-row ref-row">
+                                        <span class="detail-label"><i class="fas fa-hashtag"></i> Reference</span>
+                                        <span class="detail-value ref-number">${refId}</span>
+                                    </div>
+                                </div>
+                                <p class="success-note"><i class="fas fa-info-circle"></i> Our team will contact you within 24 hours to confirm your appointment.</p>
+                                <div class="success-actions">
+                                    <a href="appointment-status.html" class="btn btn-outline"><i class="fas fa-search"></i> Track Appointment</a>
+                                    <a href="index.html" class="btn btn-primary"><i class="fas fa-home"></i> Back to Home</a>
+                                </div>
+                            </div>
+                        `;
+                        formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else {
+                    if (typeof showToast === 'function') {
+                        showToast(result.error || 'Something went wrong. Please try again.', 'error');
+                    }
+                    btn.innerHTML = originalHTML;
                     btn.disabled = false;
-                }, 1500);
+                    btn.style.opacity = '1';
+                }
+            } catch (err) {
+                console.error('Submit error:', err);
+                if (typeof showToast === 'function') {
+                    showToast('Network error. Please check your connection and try again.', 'error');
+                }
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.style.opacity = '1';
             }
         });
     }
 
-    // 4.1 Contact Form Interaction
+    // ===========================================
+    // 5. Contact Form Handler (Supabase API)
+    // ===========================================
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('button[type="submit"]');
-            if (btn) {
-                const originalText = btn.innerText;
-                btn.innerText = 'Sending...';
-                btn.disabled = true;
+            if (!btn) return;
 
-                // Collect form data
-                const contactData = {
-                    name: document.getElementById('name')?.value || '',
-                    email: document.getElementById('email')?.value || '',
-                    phone: document.getElementById('phone')?.value || '',
-                    subject: document.getElementById('subject')?.value || '',
-                    message: document.getElementById('message')?.value || ''
-                };
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="btn-spinner" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.42" stroke-dashoffset="10"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg> Sending...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
 
-                // Save to localStorage database
-                saveContactToDatabase(contactData);
+            const formData = {
+                name: document.getElementById('name')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                phone: document.getElementById('phone')?.value || '',
+                subject: document.getElementById('subject')?.value || '',
+                message: document.getElementById('message')?.value || ''
+            };
 
-                setTimeout(() => {
-                    showSuccessMessage('Message Sent!', 'Thank you for reaching out. Our team will get back to you shortly.');
+            try {
+                const response = await fetch('/api/submit-contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast('Message sent! We\'ll get back to you soon.', 'success');
                     contactForm.reset();
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }, 1500);
+                } else {
+                    showToast(result.error || 'Could not send message. Please try again.', 'error');
+                }
+            } catch (err) {
+                console.error('Submit error:', err);
+                showToast('Network error. Please check your connection and try again.', 'error');
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.style.opacity = '1';
             }
         });
     }
 
-    // Function to save appointment to database (cloud + local fallback)
-    async function saveAppointmentToDatabase(data) {
-        // Prepare data with IDs and metadata first so local and cloud match
-        data.id = data.id || Date.now().toString();
-        data.createdAt = data.createdAt || new Date().toISOString();
-        data.status = data.status || 'pending';
+    // ===========================================
+    // 6. Newsletter Form Handler (Supabase API)
+    // ===========================================
+    const newsletterForms = document.querySelectorAll('.newsletter-form');
+    newsletterForms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const emailInput = form.querySelector('input[type="email"]');
+            if (!btn || !emailInput) return;
 
-        // 1. Try Cloud Storage (Vercel KV)
-        try {
-            const response = await fetch('/api/storage', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ type: 'appointment', data })
-            });
-            if (response.ok) {
-                console.log('Synced to cloud successfully');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="btn-spinner" viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.42" stroke-dashoffset="10"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg>';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/subscribe-newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: emailInput.value })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast(result.message, 'success');
+                    emailInput.value = '';
+                } else {
+                    showToast(result.error || 'Could not subscribe. Please try again.', 'error');
+                }
+            } catch (err) {
+                showToast('Network error. Please try again.', 'error');
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
             }
-        } catch (err) {
-            console.warn('Cloud sync failed, saving to local only:', err);
-        }
+        });
+    });
 
-        // 2. Local Fallback (always keep a local copy)
-        const storageKey = 'focusAppointments';
-        const appointments = JSON.parse(localStorage.getItem(storageKey) || '[]');
-        appointments.push(data);
-        localStorage.setItem(storageKey, JSON.stringify(appointments));
-    }
-
-    // Function to save contact to database (cloud + local fallback)
-    async function saveContactToDatabase(data) {
-        // Prepare data with IDs and metadata first so local and cloud match
-        data.id = data.id || Date.now().toString();
-        data.createdAt = data.createdAt || new Date().toISOString();
-        data.status = data.status || 'unread';
-
-        // 1. Try Cloud Storage
-        try {
-            const response = await fetch('/api/storage', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ type: 'contact', data })
-            });
-            if (response.ok) {
-                console.log('Contact synced to cloud successfully');
-            }
-        } catch (err) {
-            console.warn('Cloud sync failed, saving to local only:', err);
-        }
-
-        // 2. Local Fallback
-        const storageKey = 'focusContacts';
-        const contacts = JSON.parse(localStorage.getItem(storageKey) || '[]');
-        contacts.push(data);
-        localStorage.setItem(storageKey, JSON.stringify(contacts));
-    }
-
-    // 5. Scroll Animations
+    // ===========================================
+    // 7. Scroll Animations
+    // ===========================================
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -258,90 +323,3 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
-
-/**
- * Global Success Message Overlay
- * @param {string} title - The heading of the success card
- * @param {string} message - The detail text
- */
-function showSuccessMessage(title = 'Booking Confirmed!', message = 'Thank you! Your appointment request has been received successfully.<br><br><strong style="color: #1a1a2e;">Our team will contact you within 24 hours</strong> to confirm your booking details.') {
-    // Remove any existing success overlay
-    const existing = document.getElementById('success-overlay');
-    if (existing) existing.remove();
-
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.id = 'success-overlay';
-    overlay.style.cssText = `
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.6);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        backdrop-filter: blur(5px);
-        animation: fadeIn 0.3s ease;
-    `;
-
-    // Create success card
-    const card = document.createElement('div');
-    card.id = 'success-card';
-    card.style.cssText = `
-        background: white;
-        border-radius: 20px;
-        padding: 50px 40px;
-        text-align: center;
-        max-width: 450px;
-        width: 90%;
-        box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-        animation: slideUp 0.4s ease;
-    `;
-
-    card.innerHTML = `
-        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px;">
-            <i class="fas fa-check" style="font-size: 2.5rem; color: white;"></i>
-        </div>
-        <h2 style="color: #1a1a2e; margin-bottom: 15px; font-size: 1.75rem;">${title}</h2>
-        <p style="color: #64748b; line-height: 1.7; margin-bottom: 25px;">
-            ${message}
-        </p>
-        <button id="close-success" style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">
-            Got It!
-        </button>
-    `;
-
-    overlay.appendChild(card);
-    document.body.appendChild(overlay);
-
-    // Add animation keyframes
-    if (!document.getElementById('success-animations')) {
-        const style = document.createElement('style');
-        style.id = 'success-animations';
-        style.textContent = `
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            @keyframes slideUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // Close on button click
-    document.getElementById('close-success').addEventListener('click', () => {
-        overlay.style.animation = 'fadeIn 0.3s ease reverse';
-        setTimeout(() => overlay.remove(), 300);
-    });
-
-    // Close on overlay click
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            overlay.style.animation = 'fadeIn 0.3s ease reverse';
-            setTimeout(() => overlay.remove(), 300);
-        }
-    });
-}
